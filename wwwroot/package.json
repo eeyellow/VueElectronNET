@@ -1,0 +1,28 @@
+{
+  "name": "organic-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@linkchain/vue-lcdatepicker": "^0.0.1",
+    "@linkchain/vue-lcgrid": "^0.0.13",
+    "@progress/kendo-datasource-vue-wrapper": "2023.3.1010",
+    "@progress/kendo-dateinputs-vue-wrapper": "2023.3.1010",
+    "@progress/kendo-dropdowns-vue-wrapper": "2023.3.1010",
+    "@progress/kendo-inputs-vue-wrapper": "2023.3.1010",
+    "@vuepic/vue-datepicker": "^8.6.0",
+    "date-fns": "3.3.1",
+    "font-awesome": "4.7",
+    "lodash": "4.17.21",
+    "sweetalert2": "^11.10.5",
+    "vue": "3.4.15"
+  }
+}

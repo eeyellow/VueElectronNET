@@ -1,0 +1,148 @@
+﻿@model ElectronApp.Areas.UserManage.ViewModels.fvmEdit
+
+@{
+    
+}
+
+@section Scripts {
+    <script>
+        let PageScope = {
+            Url: {
+                DataSource: '@Url.Action(nameof(ElectronApp.Areas.UserManage.Controllers.HomeController.GetEditDataAsync).ReplaceAsyncEmpty())',
+                PostData: '@Url.Action(nameof(ElectronApp.Areas.UserManage.Controllers.HomeController.PostEditDataAsync).ReplaceAsyncEmpty())',
+            },
+            ID: '@Model.ID',
+            VueMode: '@Model.VueMode',            
+        };
+    </script>
+    <script type="module">        
+        import { fvmEdit } from "/js/TypeModules/Areas/UserManage/ViewModels/fvmEdit.js";
+        import { VueModeEnum } from "/js/TypeModules/Enums/EnumType.js";
+        import {
+            StringToStruct,
+            CleanStructError,
+            ModelMapping,
+            ModelMappingForce,
+            GetFormData,
+        } from "/js/GeneralTool.js";
+
+        Vue.createApp({
+            data () {
+                return {
+                    ApplyData: new fvmEdit(),
+                    ID: PageScope.ID,
+                    VueMode: PageScope.VueMode,
+                    VueModeEnum: VueModeEnum,
+                };
+            },
+            async mounted () {                                
+                if (this.ID != 0) {
+                    await this.getInitModel();
+                }
+            },
+            methods: {
+                /** 取得初始化資料 */
+                async getInitModel () {
+                    try {
+                        const response = await $.ajax({
+                            url: PageScope.Url.DataSource + "/" + PageScope.ID,
+                            type: "POST",
+                            headers: {
+                                RequestVerificationToken: document.querySelector(
+                                    "[name='__RequestVerificationToken']"
+                                ).value,
+                            },
+                        });
+                        ModelMappingForce(this.ApplyData, response);                                        
+                    } catch (err) {
+                        console.error(err);
+                    }
+                },
+                /** 送出表單 */
+                async postForm () {
+                    // 先將錯誤訊息清空
+                    CleanStructError(this.ApplyData);
+                    // Step1: Validate
+                    try {                        
+                        const response = await $.ajax({
+                            url: PageScope.Url.PostData,
+                            type: "POST",
+                            headers: {
+                                RequestVerificationToken: document.querySelector(
+                                    "[name='__RequestVerificationToken']"
+                                ).value,
+                            },
+                            data: {
+                                fvm: this.ApplyData,
+                            },
+                        });
+                        
+                        Swal.fire({
+                            title: '儲存成功!',
+                            text: 'Success',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    } catch (err) {
+
+                        switch (err.status) {
+                            case 400:
+                                const model = err.responseJSON.Data;
+                                ModelMappingForce(model, this.ApplyData);
+                                const modelstate = err.responseJSON.ModelState;
+
+                                modelstate.forEach(function (ele) {
+                                    StringToStruct(ele.Key, ele.Value, this.ApplyData);
+                                }, this);
+                                if (this.ApplyData.ModelError__AlertMessage) {
+                                    //alert(this.ApplyData.ModelError__AlertMessage);
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: this.ApplyData.ModelError__AlertMessage,
+                                        icon: 'error',
+                                        confirmButtonText: 'Cool'
+                                    })
+                                }
+                                break;
+                            case 500:
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Do you want to continue',
+                                    icon: 'error',
+                                    confirmButtonText: 'Cool'
+                                })
+                                break;
+                        }
+                    }
+                },
+            }
+        }).mount("#app");;
+    </script>
+}
+
+@Html.AntiForgeryToken()
+
+<div id="app" v-cloak>
+    <div class="mb-3">
+        <label class="form-label">名稱</label>
+        <input type="text" class="form-control" v-model="ApplyData.Name" />
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__Name }}
+        </span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">帳號</label>
+        <input type="text" class="form-control" v-model="ApplyData.Account" />
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__Account }}
+        </span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">密碼</label>
+        <input type="password" class="form-control" v-model="ApplyData.Mima" />
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__Mima }}
+        </span>
+    </div>
+    <button type="submit" class="btn btn-primary" v-on:click="postForm">Submit</button>
+</div>

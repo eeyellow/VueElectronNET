@@ -1,0 +1,95 @@
+﻿@{
+    //LCGrid資料來源
+    var GridDataSource = Url.Action(
+        nameof(ElectronApp.Areas.UserManage.Controllers.HomeController.Index),
+        nameof(ElectronApp.Areas.UserManage.Controllers.HomeController).GetControllerName()
+    );
+}
+
+@section Scripts {
+    <script type="module">
+        import { ListViewModel } from "AreaUserManage/ListViewModel.js";
+        document.addEventListener("DOMContentLoaded", function () {
+            Vue.createApp({
+                components: {
+                    "lc-grid": window.lcGridVue.LcGrid,
+                },
+                data () {
+                    return {
+                        searchRouterModel: new ListViewModel(),
+                        dataRows: {}
+                    };
+                },
+                async mounted () {
+                },
+                methods: {
+                    UpdateData (data) {
+                        this.dataRows = data;
+                    },
+                }
+            }).mount("#VueApp");
+        });
+    </script>
+}
+
+<section id="VueApp">
+    @Html.AntiForgeryToken()
+    <div class="container p-3">
+        <lc-grid 
+            :datasource="'@GridDataSource'" 
+            v-on:rowschanged="UpdateData"
+            :default-search-model="searchRouterModel" 
+            :sort-field="'ID'" 
+            :sort-action="'DESC'"
+            :hidden-search-space="false"
+            :content-type="'FORM'"
+            :ui-size="'sm'">
+
+            <template #search-area>
+                <div class="row">
+                    <div class="col-3 mb-3">
+                        <label for="ByField" class="form-label">關鍵字搜尋</label>
+                        <select id="ByField" name="ByField" class="form-control" v-model="searchRouterModel.ByField">
+                            <option value="0">不拘</option>
+                        </select>
+                    </div>
+                    <div class="col-3 mb-3">
+                        <label for="ByKeyword" class="form-label">&nbsp</label>
+                        <input class="form-control" id="ByKeyword" name="ByKeyword" v-model="searchRouterModel.ByKeyword">
+                    </div>
+                </div>
+            </template>
+
+            <template #feature-area>
+                <div>
+                    <a class="btn btn-sm" 
+                        style="background-color: #ec6542; color: #FFF;" 
+                        :href="`@(Url.Action("Create"))`">
+                        新增
+                    </a>
+                </div>
+            </template>
+
+            <template #list-area>
+                <div class="row list-header bg-gray-light">
+                    <div class="col th">序號</div>
+                    <div class="col th" data-sortname="Account">帳號</div>
+                    <div class="col th" data-sortname="Name">姓名</div>
+                    <div class="col th"></div>
+                </div>
+                <template v-for="(item, idx) in dataRows" :key="item">
+                    <div class="row list-body">
+                        <div class="col td" data-title="序號">{{ idx + 1 }}</div>
+                        <div class="col td" data-title="帳號">{{ item.Account }}</div>
+                        <div class="col td" data-title="姓名">{{ item.Name }}</div>
+                        <div class="col td">
+                            <a :href="`@(Url.Action("Edit"))/${item.ID}`">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </lc-grid>
+    </div>
+</section>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @if (ElectronNET.API.HybridSupport.IsElectronActive)
+    {
+        <p>目前版本： @ViewData["currentVersion"] </p>
+        <p>可使用功能： @ViewData["areaList"]</p>
+        <p>主機板序號： @ViewData["motherboardSN"]</p>
+    }
+</div>

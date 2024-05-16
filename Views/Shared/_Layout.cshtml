@@ -1,0 +1,106 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Medicine</title>
+    <link rel="icon" type="image/png" href="~/favicon.png" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/node_modules/font-awesome/css/font-awesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/node_modules/sweetalert2/dist/sweetalert2.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />   
+    <link rel="stylesheet" href="~/node_modules/@@linkchain/vue-lcgrid/dist/lcGridVue.css" asp-append-version="true" />    
+    <link rel="stylesheet" href="~/node_modules/@@vuepic/vue-datepicker/dist/main.css" asp-append-version="true" />
+    <script type="importmap">
+        {
+          "imports": {
+            "AreaUserManage/": "/js/TypeModules/Areas/UserManage/ViewModels/",
+            "AreaDepManage/": "/js/TypeModules/Areas/DepManage/ViewModels/"
+          }
+        }
+    </script>
+    <style> 
+        html,
+        body {
+            height: 100%;
+        }
+        body > footer {
+            position: sticky;
+            top: 100vh;
+        }
+        
+        .field-validation-error{
+            color: red;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Medicine</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">                                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="UserManage" asp-controller="Home" asp-action="Index">帳號管理</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="DepManage" asp-controller="Home" asp-action="Index">部門管理</a>
+                        </li>
+                        @if (env.EnvironmentName != "Production")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hangfire">排程工作</a>
+                            </li>
+                        }
+                        @if (env.EnvironmentName == "Production")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Updater" asp-controller="Home" asp-action="Index">軟體更新</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container wrapper">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Ling Cheng Technology Co., Ltd.<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    
+    @if (!ViewData.ContainsKey("NoPreload"))
+    {
+        <script src="~/js/preload.js"></script>
+    }    
+    <script src="~/node_modules/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/js/LCGrid2.js" asp-append-version="true"></script>
+    <script src="~/node_modules/vue/dist/vue.global.js" asp-append-version="true"></script>
+    
+    <script>
+        window.vue = window.Vue
+    </script>
+    <script src="~/node_modules/sweetalert2/dist/sweetalert2.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/@@linkchain/vue-lcgrid/dist/lcGridVue.umd.js" asp-append-version="true"></script>
+    <script src="~/node_modules/@@vuepic/vue-datepicker/dist/vue-datepicker.iife.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

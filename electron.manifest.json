@@ -1,0 +1,45 @@
+{
+  "executable": "Medicine",
+  "splashscreen": {
+    "imageFile": "./wwwroot/images/splashImage.svg"
+  },
+  "name": "Medicine",
+  "author": "",
+  "singleInstance": false,
+  "environment": "Production",
+  "build": {
+    "appId": "com.linkchain.Medicine.app",
+    "productName": "Medicine",
+    "copyright": "Copyright © 2024 Ling Cheng Technology Co., Ltd.",
+    "buildVersion": "0.0.1",
+    "compression": "maximum",
+    "win": {
+      "icon": "bin/wwwroot/images/medicineLarge.png",
+      "publish": [
+        {
+          "provider": "generic",
+          "url": "http://127.0.0.1:5500",
+          "channel": "latest"
+        }
+      ]
+    },
+    "directories": {
+      "output": "../../../bin/Desktop"
+    },
+    "extraResources": [
+      {
+        "from": "./bin",
+        "to": "bin",
+        "filter": [ "**/*" ]
+      }
+    ],
+    "files": [
+      {
+        "from": "./ElectronHostHook/node_modules",
+        "to": "ElectronHostHook/node_modules",
+        "filter": [ "**/*" ]
+      },
+      "**/*"
+    ]
+  }
+}

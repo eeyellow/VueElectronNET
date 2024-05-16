@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["NoPreload"] = "True";
+}
+
+@section scripts{
+    <script type="module">
+        const { ipcRenderer } = require("electron");
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            document.querySelector("#btn-update").addEventListener("click", () => {
+                document.querySelector('#host-response').innerHTML = "";
+                // 發送IPC事件：auto-update
+                ipcRenderer.send("auto-update");
+            });
+
+            // IPC事件回應：auto-update-reply
+            ipcRenderer.on('auto-update-reply', (event, message) => {
+                let innerHTML = document.querySelector('#host-response').innerHTML;
+                document.querySelector('#host-response').innerHTML = innerHTML + "<br />" + message;
+            });
+        });
+    </script>
+}
+
+<div class="text-center">
+    <p>
+        <button class="btn btn-success" id="btn-update">更新</button>
+    </p>
+    <span id="host-response"></span>
+</div>

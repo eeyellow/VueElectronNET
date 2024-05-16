@@ -1,0 +1,1395 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ElectronApp</name>
+    </assembly>
+    <members>
+        <member name="T:ElectronApp.Areas.DepManage.Controllers.HomeController">
+            <summary>
+            部門管理
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Interfaces.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger">The logger</param>
+            <param name="context">The database context</param>
+            <param name="listService">列表相關服務</param>
+            <param name="editService">新增編輯相關服務</param>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Index">
+            <summary>
+            列表頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Index(ElectronApp.Areas.DepManage.ViewModels.ListViewModel)">
+            <summary>
+            列表頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Create">
+            <summary>
+            新增頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Edit(System.Int32)">
+            <summary>
+            編輯頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.GetEditDataAsync(System.Int32)">
+            <summary>
+            編輯頁 - 取得資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.PostEditDataAsync(ElectronApp.Areas.DepManage.ViewModels.fvmEdit)">
+            <summary>
+            編輯頁 - 接收資料
+            </summary>
+            <param name="fvm"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.EditService`2">
+            <summary>
+            Departments相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.Save(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.ListService`2">
+            <summary>
+            Departments相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.FilterBySearch(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEdit">
+            <summary>
+            新增/編輯的ViewModel
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.ID">
+            <summary> 流水號 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.VueMode">
+            <summary> Vue模式 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.Name">
+            <summary> 名稱 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.Alias">
+            <summary> 縮寫 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.ParentID">
+            <summary> 上層部門的ID </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.EstablishDate">
+            <summary> 成立日期 </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.ViewModels.ListViewModel">
+            <summary>
+            ListViewModel
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.Updater.Controllers.HomeController">
+            <summary>
+            應用程式更新
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.Updater.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.Updater.Controllers.HomeController})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger">The logger</param>
+        </member>
+        <member name="M:ElectronApp.Areas.Updater.Controllers.HomeController.Index">
+            <summary>
+            更新功能首頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Areas.UserManage.Controllers.HomeController">
+            <summary>
+            使用者帳號管理
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.UserManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IListService{ElectronApp.Areas.UserManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.UserProfiles},ElectronApp.Interfaces.IEditService{ElectronApp.Areas.UserManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.UserProfiles})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger">The logger</param>
+            <param name="context">The database context</param>
+            <param name="listService"></param>
+            <param name="editService"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.Index">
+            <summary>
+            列表頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.Index(ElectronApp.Areas.UserManage.ViewModels.ListViewModel)">
+            <summary>
+            列表頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.Create">
+            <summary>
+            新增頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.Edit(System.Int32)">
+            <summary>
+            編輯頁
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.GetEditDataAsync(System.Int32)">
+            <summary>
+            編輯頁 - 取得資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.PostEditDataAsync(ElectronApp.Areas.UserManage.ViewModels.fvmEdit)">
+            <summary>
+            編輯頁 - 接收資料
+            </summary>
+            <param name="fvm"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Areas.UserManage.Services.EditService`2">
+            <summary>
+            UserProfiles相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.EditService`2.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.EditService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.EditService`2.Save(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.UserManage.Services.ListService`2">
+            <summary>
+            UserProfiles相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.ListService`2.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.ListService`2.FilterBySearch(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.ListService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.UserManage.ViewModels.fvmEdit">
+            <summary>
+            新增/編輯的ViewModel
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.UserManage.ViewModels.fvmEdit.ID">
+            <summary> 流水號 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.UserManage.ViewModels.fvmEdit.VueMode">
+            <summary> Vue模式 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.UserManage.ViewModels.fvmEdit.Name">
+            <summary> 名稱 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.UserManage.ViewModels.fvmEdit.Account">
+            <summary> 帳號 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.UserManage.ViewModels.fvmEdit.Mima">
+            <summary> 密碼 </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.UserManage.ViewModels.ListViewModel">
+            <summary>
+            ListViewModel
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Controllers.HomeController">
+            <summary>
+            首頁控制器
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{ElectronApp.Controllers.HomeController},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            建構式
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:ElectronApp.Controllers.HomeController.Index">
+            <summary>
+            Index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Controllers.HomeController.Privacy">
+            <summary>
+            Privacy
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Controllers.HomeController.Error">
+            <summary>
+            Error
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Controllers.LinkChainController">
+            <summary>
+            LinkChain管理專用功能
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Controllers.LinkChainController.#ctor(Microsoft.Extensions.Logging.ILogger{ElectronApp.Controllers.LinkChainController},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            建構式
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="webHostEnvironment"></param>
+        </member>
+        <member name="M:ElectronApp.Controllers.LinkChainController.ClassTransfer">
+            <summary>
+            C#類別轉換Js
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Controllers.BaseController">
+            <summary>
+            基底控制器
+            </summary>
+        </member>
+        <member name="F:ElectronApp.Controllers.BaseController.Configuration">
+            <summary> Configuration </summary>
+        </member>
+        <member name="M:ElectronApp.Controllers.BaseController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary> Constructor </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:ElectronApp.Controllers.BaseController.LcGridJson(System.Int32,System.Object)">
+            <summary> 回傳LC-Grid接收Json </summary>
+            <param name="total"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Controllers.BaseController.GetPagedListAsync``2(``0,System.Linq.IQueryable{``1})">
+            <summary> 取得分頁模型 </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Database.Contexts.DatabaseContext">
+            <summary> 資料庫內容 </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Contexts.DatabaseContext.UserProfiles">
+            <summary> 帳號資料 </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Contexts.DatabaseContext.Departments">
+            <summary> 部門資料 </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Contexts.DatabaseContext.UserInDepartments">
+            <summary> 人員與部門的關聯表 </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Contexts.DatabaseContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ElectronApp.Database.Contexts.DatabaseContext})">
+            <summary>
+            建構式
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:ElectronApp.Database.Contexts.DatabaseContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            覆寫 OnModelCreating 方法，用於設定資料庫模型建立時的行為
+            </summary>
+            <param name="modelBuilder">資料庫模型建立器</param>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.Departments">
+            <summary>
+            部門資料
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.Departments.Name">
+            <summary>
+            名稱
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.Departments.Alias">
+            <summary>
+            縮寫
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.Departments.ParentID">
+            <summary>
+            上層部門的ID
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.Departments.EstablishDate">
+            <summary>
+            成立日期
+            </summary> 
+        </member>
+        <member name="T:ElectronApp.Database.Entities.UserInDepartments">
+            <summary>
+            人員與部門的關聯表
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UserInDepartments.UserID">
+            <summary>
+            名稱
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UserInDepartments.DepartmentID">
+            <summary>
+            名稱
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.UserProfiles">
+            <summary>
+            帳號資料
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UserProfiles.Name">
+            <summary>
+            名稱
+            </summary>                
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UserProfiles.Account">
+            <summary>
+            帳號
+            </summary>                
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UserProfiles.Mima">
+            <summary>
+            密碼
+            </summary>                
+        </member>
+        <member name="T:ElectronApp.Database.Entities.IDelete">
+            <summary>
+            介面 - 紀錄欄位
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.IDelete.IsDelete">
+            <summary> 是否刪除 </summary>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.IEntity">
+            <summary>
+            介面 - 紀錄欄位
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.IEntity.ID">
+            <summary> 流水號 </summary>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.IRecord">
+            <summary>
+            介面 - 紀錄欄位
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.IRecord.CreateDatetime">
+            <summary> 新增日期 </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.IRecord.UpdateDatetime">
+            <summary> 更新日期 </summary>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.ARecord">
+            <summary>
+            抽象 - 紀錄欄位
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.ARecord.ID">
+            <inheritdoc/>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.ARecord.IsDelete">
+            <inheritdoc/>       
+        </member>
+        <member name="P:ElectronApp.Database.Entities.ARecord.CreateDatetime">
+            <inheritdoc/>        
+        </member>
+        <member name="P:ElectronApp.Database.Entities.ARecord.UpdateDatetime">
+            <inheritdoc/>             
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.SqlDefaultValueAttributeConvention">
+            <summary>
+            提供將屬性慣例應用於模型生成器的擴展方法。
+            Provides extension methods for applying attribute conventions to the model builder.
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.SqlDefaultValueAttributeConvention.Apply(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            將 SQL 預設值屬性慣例應用於模型生成器。
+            Applies the SQL default value attribute convention to the model builder.
+            </summary>
+            <param name="builder">The model builder.</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.DecimalPrecisionAttributeConvention">
+            <summary>
+            提供將屬性慣例應用於模型生成器的擴展方法。
+            Provides extension methods for applying attribute conventions to the model builder.
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.DecimalPrecisionAttributeConvention.Apply(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            將十進制精度屬性慣例應用於模型生成器。
+            Applies the decimal precision attribute convention to the model builder.
+            </summary>
+            <param name="builder">The model builder.</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.CustomDataTypeAttributeConvention">
+            <summary>
+            提供將屬性慣例應用於模型生成器的擴展方法。
+            Provides extension methods for applying attribute conventions to the model builder.
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.CustomDataTypeAttributeConvention.Apply(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            將自訂資料類型屬性慣例應用於模型生成器。
+            Applies the custom data type attribute convention to the model builder.
+            </summary>
+            <param name="builder">The model builder.</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.ConventionBehaviors">
+            <summary>
+            提供將屬性慣例應用於模型生成器的輔助方法。
+            Provides helper methods for applying attribute conventions to the model builder.
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.ConventionBehaviors.SetTypeForPropertiesWithAttribute``1(Microsoft.EntityFrameworkCore.ModelBuilder,System.Func{``0,System.String})">
+            <summary>
+            為具有指定屬性的屬性設置欄位類型。
+            Sets the column type for properties with the specified attribute.
+            </summary>
+            <typeparam name="TAttribute">The type of the attribute.</typeparam>
+            <param name="builder">The model builder.</param>
+            <param name="lambda">The lambda expression to get the column type from the attribute.</param>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.ConventionBehaviors.SetSqlValueForPropertiesWithAttribute``1(Microsoft.EntityFrameworkCore.ModelBuilder,System.Func{``0,System.String})">
+            <summary>
+            為具有指定屬性的屬性設置預設值 SQL。
+            Sets the default value SQL for properties with the specified attribute.
+            </summary>
+            <typeparam name="TAttribute">The type of the attribute.</typeparam>
+            <param name="builder">The model builder.</param>
+            <param name="lambda">The lambda expression to get the default value SQL from the attribute.</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.SqlDefaultValueAttribute">
+            <summary>
+            指定屬性的 SQL 伺服器上定義的預設值。
+            Specifies a default value defined on the SQL server for a property.
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Extensions.SqlDefaultValueAttribute.DefaultValue">
+            <summary>
+            獲取或設置要應用的預設值。
+            Gets or sets the default value to apply.
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.SqlDefaultValueAttribute.#ctor(System.String)">
+            <summary>
+            初始化 <see cref="T:ElectronApp.Database.Extensions.SqlDefaultValueAttribute"/> 類的新執行個體。
+            Initializes a new instance of the <see cref="T:ElectronApp.Database.Extensions.SqlDefaultValueAttribute"/> class.
+            </summary>
+            <param name="value">The default value to apply.</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.DecimalPrecisionAttribute">
+            <summary>
+            指定十進制 SQL 資料類型的精度。
+            Specifies the decimal precision of a decimal SQL data type.
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Extensions.DecimalPrecisionAttribute.Precision">
+            <summary>
+            獲取或設置精度 - 即小數點左右的位數。
+            Gets or sets the precision - the number of digits both left and right of the decimal.
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Extensions.DecimalPrecisionAttribute.Scale">
+            <summary>
+            獲取或設置縮放 - 即小數點右側的位數。
+            Gets or sets the scale - the number of digits to the right of the decimal.
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.DecimalPrecisionAttribute.#ctor(System.Int32,System.Int32)">
+            <summary>
+            初始化 <see cref="T:ElectronApp.Database.Extensions.DecimalPrecisionAttribute"/> 類的新執行個體。
+            Initializes a new instance of the <see cref="T:ElectronApp.Database.Extensions.DecimalPrecisionAttribute"/> class.
+            </summary>
+            <param name="precision">The precision - the number of digits both left and right of the decimal.</param>
+            <param name="scale">The scale - the number of digits to the right of the decimal.</param>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.DecimalPrecisionAttribute.#ctor(System.Int32[])">
+            <summary>
+            初始化 <see cref="T:ElectronApp.Database.Extensions.DecimalPrecisionAttribute"/> 類的新執行個體。
+            Initializes a new instance of the <see cref="T:ElectronApp.Database.Extensions.DecimalPrecisionAttribute"/> class.
+            </summary>
+            <param name="values">The array of values where the first element is the precision and the second element is the scale.</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.SoftDeleteQueryFilter">
+            <summary>
+            提供加入軟刪除查詢過濾器的擴充方法
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.SoftDeleteQueryFilter.Apply(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            加入軟刪除查詢過濾器
+            參考 https://www.thereformedprogrammer.net/introducing-the-efcore-softdeleteservices-library-to-automate-soft-deletes/
+            </summary>
+            <param name="builder">ModelBuilder 物件</param>
+        </member>
+        <member name="T:ElectronApp.Database.Extensions.SoftDeleteExtension">
+            <summary>
+            DbContext 擴充方法
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.SoftDeleteExtension.AddSoftDeleteQueryFilter(Microsoft.EntityFrameworkCore.Metadata.IMutableEntityType)">
+            <summary>
+            加入軟刪除查詢過濾器
+            參考 https://www.thereformedprogrammer.net/introducing-the-efcore-softdeleteservices-library-to-automate-soft-deletes/
+            </summary>
+            <param name="entityData"></param>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.SoftDeleteExtension.GetSoftDeleteFilter``1">
+            <summary>
+            取得軟刪除查詢過濾器
+            參考 https://www.thereformedprogrammer.net/introducing-the-efcore-softdeleteservices-library-to-automate-soft-deletes/
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Database.Extensions.SoftDeleteExtension.FindAllWithDelete``1(Microsoft.EntityFrameworkCore.DbSet{``0})">
+            <summary>
+            取得所有資料(包含已刪除)
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="dbSet"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Enums.VueModeEnum">
+            <summary>
+            Vue模式
+            </summary>
+        </member>
+        <member name="F:ElectronApp.Enums.VueModeEnum.Edit">
+            <summary> 編輯 </summary>
+        </member>
+        <member name="F:ElectronApp.Enums.VueModeEnum.Detail">
+            <summary> 檢視 </summary>
+        </member>
+        <member name="T:ElectronApp.Interfaces.IEditService`2">
+            <summary> 新增/編輯功能相關操作服務介面 </summary>
+        </member>
+        <member name="M:ElectronApp.Interfaces.IEditService`2.Save(`0)">
+            <summary>
+            儲存變更
+            </summary>
+            <param name="fvm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Interfaces.IEditService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            驗證
+            </summary>
+            <param name="fvm"></param>
+            <param name="modelState"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Interfaces.IListService`2">
+            <summary> 列表功能相關操作服務介面 </summary>
+        </member>
+        <member name="M:ElectronApp.Interfaces.IListService`2.FilterBySearch(`0)">
+            <summary>
+            列表搜尋篩選
+            </summary>
+            <param name="fvm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Interfaces.IListService`2.FindByIdAsync(System.Int32)">
+            <summary>
+            依ID尋找
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Interfaces.IPager">
+            <summary> 分頁屬性 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.PageCount">
+            <summary> 總頁數 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.TotalItemCount">
+            <summary> 資料總數 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.PageIndex">
+            <summary> 頁面索引(從0開始) </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.PageNumber">
+            <summary> 分頁索引(從1開始) </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.PageSize">
+            <summary> 每頁資料行數量上限 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.IsFirstPage">
+            <summary> 是否為第一個 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.IsLastPage">
+            <summary> 是否為最後一頁 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPager.ItemCount">
+            <summary> 當前頁面資料總數 </summary>
+        </member>
+        <member name="T:ElectronApp.Interfaces.IPagedList">
+            <summary> 分頁清單介面(未指定泛型) </summary>
+        </member>
+        <member name="T:ElectronApp.Interfaces.IPagedList`1">
+            <summary> 分頁清單介面 </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:ElectronApp.Interfaces.IPageSort">
+            <summary> 基底排序模型介面 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPageSort.NowPage">
+            <summary> 目前頁數 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPageSort.PageSize">
+            <summary> 分頁筆數 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPageSort.SortField">
+            <summary> 目前排序欄位 </summary>
+        </member>
+        <member name="P:ElectronApp.Interfaces.IPageSort.SortAction">
+            <summary> 排序方法 </summary>
+        </member>
+        <member name="T:ElectronApp.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.Departments">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.Departments.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.Departments.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.Departments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.UserInDepartment">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UserInDepartment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UserInDepartment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UserInDepartment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.DepartmentsEstablishDate">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DepartmentsEstablishDate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DepartmentsEstablishDate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DepartmentsEstablishDate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.DatetimeTypeChange">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DatetimeTypeChange.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DatetimeTypeChange.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DatetimeTypeChange.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Program">
+            <summary>
+            主程式類別
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Program.Main(System.String[])">
+            <summary>
+            主程式進入點
+            </summary>
+            <param name="args">命令列參數</param>
+        </member>
+        <member name="T:ElectronApp.ElectronEntryPoint">
+            <summary>
+            Electron進入點
+            </summary>
+        </member>
+        <member name="F:ElectronApp.ElectronEntryPoint._isDoubleClickEvent">
+            <summary>
+            表示是否為雙擊事件的標記
+            </summary>
+        </member>
+        <member name="M:ElectronApp.ElectronEntryPoint.Bootstrap(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            啟動Electron介面
+            </summary>
+        </member>
+        <member name="M:ElectronApp.ElectronEntryPoint.SingleClickAsync">
+            <summary>
+            單擊事件的處理方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.ElectronEntryPoint.DoubleClickAsync">
+            <summary>
+            雙擊事件的處理方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Tools.AutofacModule">
+            <summary>
+            Autofac Module
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.AutofacModule.Load(Autofac.ContainerBuilder)">
+            <summary>
+            註冊 至 Container
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:ElectronApp.Tools.CommonLinqExtension">
+            <summary> Linq Extension </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.ApplyOrder``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary> 擴充動態排序底層方法(含關聯資料表欄位排序) </summary>
+            <typeparam name="T">IQueryable</typeparam>
+            <param name="source">資料</param>
+            <param name="property">欄位名稱</param>
+            <param name="methodName">排序方法</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.OrderBy``1(System.Linq.IQueryable{``0},System.String)">
+            <summary> 擴充動態排序 OrderBy </summary>
+            <typeparam name="T">IQueryable</typeparam>
+            <param name="source">資料</param>
+            <param name="property">欄位名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.OrderByDescending``1(System.Linq.IQueryable{``0},System.String)">
+            <summary> 擴充動態排序 OrderByDescending </summary>
+            <typeparam name="T">IQueryable</typeparam>
+            <param name="source">資料</param>
+            <param name="property">欄位名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.ThenBy``1(System.Linq.IOrderedQueryable{``0},System.String)">
+            <summary> 擴充動態排序 ThenBy </summary>
+            <typeparam name="T">IOrderedQueryable</typeparam>
+            <param name="source">資料</param>
+            <param name="property">欄位名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.ThenByDescending``1(System.Linq.IOrderedQueryable{``0},System.String)">
+            <summary> 擴充動態排序 ThenByDescending </summary>
+            <typeparam name="T">IOrderedQueryable</typeparam>
+            <param name="source">資料</param>
+            <param name="property">欄位名稱</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.SplitTypeAndExpression``1(System.String,System.Linq.Expressions.Expression,System.Type@,System.Linq.Expressions.Expression@)">
+            <summary> 解析關聯屬性並傳回相關的 type 及 lambda </summary>
+            <typeparam name="T"></typeparam>
+            <param name="properties"></param>
+            <param name="arg"></param>
+            <param name="type"></param>
+            <param name="expr"></param>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.OrderBy``1(System.Linq.IQueryable{``0},ElectronApp.Interfaces.IPageSort)">
+            <summary> 指定排序的欄位及方法(遞增 or 遞減) </summary>
+            <typeparam name="T">排序</typeparam>
+            <param name="source">IQueryable</param>
+            <param name="sortModel">查詢模型</param>
+            <example>多欄位排序請傳入 sortModel.SortField = "PrimaryDate:desc,Code:asc" </example>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.MultiOrderBy``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary> 指定排序的欄位及方法(以關聯資料表欄位做排序) </summary>
+            <typeparam name="T">排序</typeparam>
+            <param name="source">IQueryable</param>
+            <param name="properties">屬性[.屬性.屬性---].欄位名稱</param>
+            <param name="orderType">排序方式(Asc、Desc)</param>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.Like``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary> 執行 like 查詢(若關鍵字為空orNull則不做查詢動作) </summary>
+            <typeparam name="T">查詢某欄位的關鍵字</typeparam>
+            <param name="source">IQueryable</param>
+            <param name="propertyName">欄位名稱</param>
+            <param name="keyword">關鍵字</param>
+        </member>
+        <member name="M:ElectronApp.Tools.CommonLinqExtension.MultiLike``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary> 執行 like 查詢(以關聯資料表欄位做查詢) </summary>
+            <typeparam name="T">查詢某欄位的關鍵字</typeparam>
+            <param name="source">IQueryable</param>
+            <param name="properties">屬性[.屬性.屬性---].欄位名稱</param>
+            <param name="keyword">關鍵字</param>
+        </member>
+        <member name="T:ElectronApp.Tools.ElectronManifestTool">
+            <summary>
+            ElectronManifest工具
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.ElectronManifestTool.ReadManifest(System.String)">
+            <summary>
+            讀取Manifest檔案並將其反序列化為Manifest物件
+            </summary>
+            <returns>反序列化後的Manifest物件</returns>
+        </member>
+        <member name="T:ElectronApp.Tools.Manifest">
+            <summary>
+            Electron應用程式的Manifest類別
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.Executable">
+            <summary> Executable </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.Splashscreen">
+            <summary> Splashscreen </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.Name">
+            <summary> Name </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.Author">
+            <summary> Author </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.SingleInstance">
+            <summary> SingleInstance </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.Environment">
+            <summary> Environment </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Manifest.Build">
+            <summary> Build </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.Splashscreen">
+            <summary>
+            Splashscreen類別，用於定義啟動畫面相關資訊
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Splashscreen.ImageFile">
+            <summary> ImageFile </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.Build">
+            <summary>
+            Build類別，用於定義應用程式建置相關資訊
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.AppId">
+            <summary> AppId </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.ProductName">
+            <summary> ProductName </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.Copyright">
+            <summary> Copyright </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.BuildVersion">
+            <summary> BuildVersion </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.Compression">
+            <summary> Compression </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.Win">
+            <summary> Win </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.Directories">
+            <summary> Directories </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Build.ExtraResources">
+            <summary> ExtraResources </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.Win">
+            <summary>
+            Win類別，用於定義Windows相關資訊
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Win.Icon">
+            <summary> Icon </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Win.Publish">
+            <summary> Publish </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.Directories">
+            <summary>
+            Directories類別，用於定義目錄相關資訊
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Directories.Output">
+            <summary> Output </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.ExtraResource">
+            <summary>
+            ExtraResource類別，用於定義額外資源相關資訊
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.ExtraResource.From">
+            <summary> From </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.ExtraResource.To">
+            <summary> To </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.ExtraResource.Filter">
+            <summary> Filter </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.Publish">
+            <summary>
+            Publish類別，用於定義發佈相關資訊
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Publish.Provider">
+            <summary> Provider </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Publish.Url">
+            <summary> Url </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.Publish.Channel">
+            <summary> Channel </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.HardwareInfoTool">
+            <summary>
+            硬體資訊工具
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.HardwareInfoTool.#cctor">
+            <summary>
+            static constructor
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.HardwareInfoTool.GetMotherboardSN">
+            <summary>
+            取得主機板序號
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Tools.HttpTool">
+            <summary>
+            Http工具
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.HttpTool.CreateResponse(ElectronApp.ViewModels.StatusResultViewModel)">
+            <summary>
+            建立Response
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.HttpTool.CreateResponse(ElectronApp.ViewModels.ModelStateViewModel)">
+            <summary>
+            建立Response
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Tools.ModelStateExtensions">
+            <summary>
+            ModelState擴充方法
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelStateExtensions.ToSerializedDictionary(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            序列化為字典
+            </summary>
+            <param name="modelState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelStateExtensions.ToSerializedList(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            序列化為清單
+            </summary>
+            <param name="modelState"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Tools.ModelTool">
+            <summary>
+            提供模型之間的映射和轉換功能的工具類別。
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.Mapping``2(``0,``1,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary> 將兩個模型間名稱相同的欄位做值的映射 </summary>
+            <typeparam name="S"></typeparam>
+            <typeparam name="T"></typeparam>
+            <param name="source">來源模型</param>
+            <param name="target">目標模型</param>
+            <param name="filterFieldNames">不更新的欄位名稱</param>
+            <param name="targetFieldNames">要更新的欄位名稱</param>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.MappingIEntity``2(``0,``1,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary> 將兩個模型間名稱相同的欄位做值的映射 </summary>
+            <typeparam name="S"></typeparam>
+            <typeparam name="T"></typeparam>
+            <param name="source">來源模型</param>
+            <param name="target">目標模型</param>
+            <param name="ofilterFieldNames">不更新的欄位名稱</param>
+            <param name="otargetFieldNames">要更新的欄位名稱</param>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.MappingWithoutNull``2(``0,``1,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary> 將兩個模型間名稱相同的欄位做值的映射 </summary>
+            <typeparam name="S"></typeparam>
+            <typeparam name="T"></typeparam>
+            <param name="source">來源模型</param>
+            <param name="target">目標模型</param>
+            <param name="filterFieldNames">不更新的欄位名稱</param>
+            <param name="targetFieldNames">要更新的欄位名稱</param>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.MappingAndReturn``2(``0,``1,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary> 將兩個模型間名稱相同的欄位做值的映射 </summary>
+            <typeparam name="S"></typeparam>
+            <typeparam name="T"></typeparam>
+            <param name="source">來源模型</param>
+            <param name="target">目標模型</param>
+            <param name="filterFieldNames">不更新的欄位名稱</param>
+            <param name="targetFieldNames">要更新的欄位名稱</param>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.IsAnyNullOrEmpty(System.Object)">
+            <summary>
+            檢查物件是否每個屬性都有值
+            </summary>
+            <param name="myObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.ToObject``1(System.String)">
+            <summary>
+            json 轉物件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.ToJson``1(``0)">
+            <summary>
+            json 轉物件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.GetDescription(System.Object)">
+            <summary> 取得自訂 Enum 描述 (多語系要出去後再處理) </summary>
+            <param name="enumValue">Enum物件</param>
+            <returns> Enum描述 </returns>
+        </member>
+        <member name="M:ElectronApp.Tools.ModelTool.ParseToDictionary(System.Type)">
+            <summary> Enum 型別解析成 資料字典 </summary>
+            <param name="type">Enum型態</param>
+            <returns>Enum資料字典(value => item1: enum text; item2: enum description)</returns>
+        </member>
+        <member name="T:ElectronApp.Tools.PagedListExtension">
+            <summary> 擴充函式庫-分頁 </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.PagedListExtension.GetCurrentPageIndex(System.Object)">
+            <summary> 取得目前頁數 </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.PagedListExtension.ToPagedListAsync``1(System.Linq.IQueryable{``0},ElectronApp.Interfaces.IPageSort)">
+            <summary> 依SortModel裡的資訊做分頁 </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.RequestExtension">
+            <summary> 請求 擴充方法 </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.RequestExtension.IsAjaxRequest(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary> 是否是 AJAX請求 </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.RequestExtension.IsInternetExplorer(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary> 判斷是否是IE </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.RouterTool">
+            <summary>
+            Router工具
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.RouterTool.GetAreas">
+            <summary>
+            取得Areas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Tools.StringExtension">
+            <summary> 字串 擴充方法 </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.StringExtension.SplitToInt(System.String,System.String)">
+            <summary> 字串轉數字清單 </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.StringExtension.GetControllerName(System.String)">
+            <summary> 去掉 Controller 結尾 </summary>
+            <param name="controllerName"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">不可為空</exception>
+            <exception cref="T:System.ArgumentException">請使用Controller類別</exception>
+        </member>
+        <member name="M:ElectronApp.Tools.StringExtension.ReplaceControllerEmpty(System.String)">
+            <summary>
+            移除字串尾端Controller
+            </summary>
+            <param name="controllerString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.StringExtension.ReplaceAsyncEmpty(System.String)">
+            <summary>
+            移除字串尾端Async
+            </summary>
+            <param name="AsyncString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Tools.TypeTransferExtension">
+            <summary> C# Type 轉 Javascript Class </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.TypeTransferExtension.GenerateScriptType">
+            <summary> 產生Script類型 </summary>
+        </member>
+        <member name="F:ElectronApp.Tools.TypeTransferExtension.GenerateScriptType.All">
+            <summary> All </summary>
+        </member>
+        <member name="F:ElectronApp.Tools.TypeTransferExtension.GenerateScriptType.Javascript">
+            <summary> Javascript </summary>
+        </member>
+        <member name="F:ElectronApp.Tools.TypeTransferExtension.GenerateScriptType.Typescript">
+            <summary> Typescript </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.TypeTransferExtension.Generate(System.String,ElectronApp.Tools.TypeTransferExtension.GenerateScriptType)">
+            <summary> 產生Script </summary>
+            <param name="rootPath"></param>
+            <param name="scriptType"></param>
+        </member>
+        <member name="M:ElectronApp.Tools.TypeTransferExtension.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            AddRange
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="destination"></param>
+            <param name="source"></param>
+        </member>
+        <member name="T:ElectronApp.Tools.DocumentationExtensions">
+            <summary>
+            Utility class to provide documentation for various types where available with the assembly
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.GetDocumentation(System.Reflection.MethodInfo)">
+            <summary> Provides the documentation comments for a specific method </summary>
+            <param name="methodInfo">The MethodInfo (reflection data ) of the member to find documentation for</param>
+            <returns>The XML fragment describing the method</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.GetDocumentation(System.Reflection.MemberInfo)">
+            <summary> Provides the documentation comments for a specific member </summary>
+            <param name="memberInfo">The MemberInfo (reflection data) or the member to find documentation for</param>
+            <returns>The XML fragment describing the member</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.GetSummary(System.Reflection.MemberInfo)">
+            <summary> Returns the Xml documentation summary comment for this member </summary>
+            <param name="memberInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.GetDocumentation(System.Type)">
+            <summary> Provides the documentation comments for a specific type </summary>
+            <param name="type">Type to find the documentation for</param>
+            <returns>The XML fragment that describes the type</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.GetSummary(System.Type)">
+            <summary> Gets the summary portion of a type's documentation or returns an empty string if not available </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.XmlFromName(System.Type,System.Char,System.String)">
+            <summary> Obtains the XML Element that describes a reflection element by searching the members for a member that has a name that describes the element. </summary>
+            <param name="type">The type or parent type, used to fetch the assembly</param>
+            <param name="prefix">The prefix as seen in the name attribute in the documentation XML</param>
+            <param name="name">Where relevant, the full name qualifier for the element</param>
+            <returns>The member that has a name that describes the specified reflection element</returns>
+        </member>
+        <member name="F:ElectronApp.Tools.DocumentationExtensions._cache">
+            <summary> A cache used to remember Xml documentation for assemblies </summary>
+        </member>
+        <member name="F:ElectronApp.Tools.DocumentationExtensions._failCache">
+            <summary> A cache used to store failure exceptions for assembly lookups </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.XmlFromAssembly(System.Reflection.Assembly)">
+            <summary> Obtains the documentation file for the specified assembly </summary>
+            <param name="assembly">The assembly to find the XML document for</param>
+            <returns>The XML document</returns>
+            <remarks>This version uses a cache to preserve the assemblies, so that
+            the XML file is not loaded and parsed on every single lookup</remarks>
+        </member>
+        <member name="M:ElectronApp.Tools.DocumentationExtensions.XmlFromAssemblyNonCached(System.Reflection.Assembly)">
+            <summary> Loads and parses the documentation file for the specified assembly </summary>
+            <param name="assembly">The assembly to find the XML document for</param>
+            <returns>The XML document</returns>
+        </member>
+        <member name="T:ElectronApp.ViewModels.BaseSortViewModel">
+            <summary> 基底排序模型 </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSortViewModel.NowPage">
+            <summary>目前頁數(default:1 不可為負)</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSortViewModel.PageSize">
+            <summary>分頁筆數(default:10 不可為負)</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSortViewModel.SortField">
+            <summary>目前排序欄位</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSortViewModel.SortAction">
+            <summary>排序方法</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSortViewModel.OpenSearchMore">
+            <summary>打開進階查詢</summary>
+        </member>
+        <member name="T:ElectronApp.ViewModels.BaseSearchViewModel">
+            <summary> 基底搜尋模型 </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSearchViewModel.ByField">
+            <summary> 查詢欄位 </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.BaseSearchViewModel.ByKeyword">
+            <summary> 搜尋關鍵字 </summary>
+        </member>
+        <member name="T:ElectronApp.ViewModels.ErrorViewModel">
+            <summary>
+            Represents the view model for displaying error information.
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.ErrorViewModel.RequestId">
+            <summary>
+            Gets or sets the request ID.
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.ErrorViewModel.ShowRequestId">
+            <summary>
+            Gets a value indicating whether the request ID should be shown.
+            </summary>
+        </member>
+        <member name="T:ElectronApp.ViewModels.ModelStateViewModel">
+            <summary>
+            ModelState回應訊息
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.ModelStateViewModel.StatusCode">
+            <summary>
+            Http狀態碼
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.ModelStateViewModel.Data">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.ModelStateViewModel.ModelState">
+            <summary>
+            ModelState
+            </summary>
+        </member>
+        <member name="T:ElectronApp.ViewModels.PagedList`1">
+            <summary> 分頁清單 </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.PageIndex">
+            <summary>頁面索引(從0開始)</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.PageSize">
+            <summary>每頁資料行數量上限</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.PageCount">
+            <summary>總頁數</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.TotalItemCount">
+            <summary>資料總數</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.ItemCount">
+            <summary>當前頁面資料總數</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.PageNumber">
+            <summary>分頁索引(從1開始)</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.IsFirstPage">
+            <summary>是否為第一個</summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.PagedList`1.IsLastPage">
+            <summary>是否為最後一頁</summary>
+        </member>
+        <member name="M:ElectronApp.ViewModels.PagedList`1.#ctor">
+            <summary> 預設建構子(供子類別使用) </summary>
+        </member>
+        <member name="M:ElectronApp.ViewModels.PagedList`1.InitializeAsync(System.Linq.IQueryable{`0},System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary> 初始化分頁資訊與資料列 </summary>
+            <param name="source"></param>
+            <param name="index"></param>
+            <param name="pageSize"></param>
+            <param name="totalCount"></param>
+        </member>
+        <member name="T:ElectronApp.ViewModels.StatusResultViewModel">
+            <summary>
+            Http回應狀態碼與訊息
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.StatusResultViewModel.StatusCode">
+            <summary>
+            Http狀態碼
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.StatusResultViewModel.Message">
+            <summary>
+            回應訊息
+            </summary>
+        </member>
+        <member name="P:ElectronApp.ViewModels.StatusResultViewModel.Data">
+            <summary>
+            回應資料
+            </summary>
+        </member>
+    </members>
+</doc>

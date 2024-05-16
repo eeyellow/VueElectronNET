@@ -1,0 +1,193 @@
+﻿@model ElectronApp.Areas.DepManage.ViewModels.fvmEdit
+
+@{
+    //取得資料
+    var UrlDataSource = Url.Action(nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.GetEditDataAsync).ReplaceAsyncEmpty());
+    //送出資料
+    var UrlPostData = Url.Action(nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.PostEditDataAsync).ReplaceAsyncEmpty());
+}
+
+@section Scripts {
+    <script>
+        let PageScope = {
+            Url: {
+                DataSource: '@UrlDataSource',
+                PostData: '@UrlPostData',
+            },
+            ID: '@Model.ID',
+            VueMode: '@Model.VueMode',            
+        };
+    </script>
+    <script type="module">        
+        import { fvmEdit } from "/js/TypeModules/Areas/DepManage/ViewModels/fvmEdit.js";
+        import { VueModeEnum } from "/js/TypeModules/Enums/EnumType.js";
+        import {
+            StringToStruct,
+            CleanStructError,
+            ModelMapping,
+            ModelMappingForce,
+            GetFormData,
+        } from "/js/GeneralTool.js";
+
+        Vue.createApp({
+            components: {
+                "lc-datepicker": window.VueDatePicker,
+            },
+            data () {
+                return {
+                    ApplyData: new fvmEdit(),
+                    ID: PageScope.ID,
+                    VueMode: PageScope.VueMode,
+                    VueModeEnum: VueModeEnum,
+                    TWFormatter: {
+                        //[optional] Date to String
+                        stringify: (date, token) => {
+                            let formatDate = new Intl.DateTimeFormat('Latin', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hourCycle: 'h23',
+                            }).format(date);
+                            let year = formatDate.split('/')[0];
+                            let month = formatDate.split('/')[1];
+                            let day = formatDate.split('/')[2];
+                            let TWDate = `${parseInt(year) - 1911}/${month}/${day}`;
+                            return TWDate;
+                        },
+                        //[optional]  String to Date
+                        parse: (value) => {
+                            let TWyear = value.split('/')[0];
+                            let year;
+                            if (TWyear < 1000) {
+                                year = parseInt(TWyear) + 1911;
+                            } else {
+                                year = TWyear;
+                            }
+                            let month = value.split('/')[1];
+                            let day = value.split('/')[2];
+                            let date = `${year}/${month}/${day}`;
+                            return new Date(date);
+                        },
+                    },
+                };
+            },
+            async mounted () {                                
+                if (this.ID != 0) {
+                    await this.getInitModel();
+                }
+            },
+            methods: {
+                /** 取得初始化資料 */
+                async getInitModel () {
+                    try {
+                        const response = await $.ajax({
+                            url: PageScope.Url.DataSource + "/" + PageScope.ID,
+                            type: "POST",
+                            headers: {
+                                RequestVerificationToken: document.querySelector(
+                                    "[name='__RequestVerificationToken']"
+                                ).value,
+                            },
+                        });
+                        ModelMappingForce(this.ApplyData, response);
+                    } catch (err) {
+                        console.error(err);
+                    }
+                },
+                /** 送出表單 */
+                async postForm () {
+                    // 先將錯誤訊息清空
+                    CleanStructError(this.ApplyData);
+                    // Step1: Validate
+                    try {                        
+                        const response = await $.ajax({
+                            url: PageScope.Url.PostData,
+                            type: "POST",
+                            headers: {
+                                RequestVerificationToken: document.querySelector(
+                                    "[name='__RequestVerificationToken']"
+                                ).value,
+                            },
+                            data: {
+                                fvm: this.ApplyData,
+                            },
+                        });
+                        
+                        Swal.fire({
+                            title: '儲存成功!',
+                            text: 'Success',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    } catch (err) {
+
+                        switch (err.status) {
+                            case 400:
+                                const model = err.responseJSON.Data;
+                                ModelMappingForce(model, this.ApplyData);
+                                const modelstate = err.responseJSON.ModelState;
+
+                                modelstate.forEach(function (ele) {
+                                    StringToStruct(ele.Key, ele.Value, this.ApplyData);
+                                }, this);
+                                if (this.ApplyData.ModelError__AlertMessage) {
+                                    //alert(this.ApplyData.ModelError__AlertMessage);
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: this.ApplyData.ModelError__AlertMessage,
+                                        icon: 'error',
+                                        confirmButtonText: 'Cool'
+                                    })
+                                }
+                                break;
+                            case 500:
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Do you want to continue',
+                                    icon: 'error',
+                                    confirmButtonText: 'Cool'
+                                })
+                                break;
+                        }
+                    }
+                },
+            }
+        }).mount("#app");;
+    </script>
+}
+
+@Html.AntiForgeryToken()
+
+<div id="app" v-cloak>
+    <div class="mb-3">
+        <label class="form-label">名稱</label>
+        <input type="text" class="form-control" v-model="ApplyData.Name" />
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__Name }}
+        </span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">縮寫</label>
+        <input type="text" class="form-control" v-model="ApplyData.Alias" />
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__Alias }}
+        </span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">上層部門的ID</label>
+        <input type="text" class="form-control" v-model="ApplyData.ParentID" />
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__ParentID }}
+        </span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">成立日期</label>
+        <lc-datepicker v-model="ApplyData.EstablishDate">
+        </lc-datepicker>
+        <span class="field-validation-error">
+            {{ ApplyData.ModelError__EstablishDate }}
+        </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" v-on:click="postForm">Submit</button>
+</div>
