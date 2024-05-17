@@ -39,3 +39,16 @@ npm install @vuepic/vue-datepicker
 <link rel="stylesheet" href="~/node_modules/@@vuepic/vue-datepicker/dist/main.css" asp-append-version="true" />
 <script src="~/node_modules/@@vuepic/vue-datepicker/dist/vue-datepicker.iife.js" asp-append-version="true"></script>
 ```
+
+## 4. 下拉選單套件: [vue-select](https://vue-select.org/)
+
+安裝
+
+```sh
+npm install vue-select@beta
+```
+
+```html
+<link rel="stylesheet" href="~/node_modules/vue-select/dist/vue-select.css" asp-append-version="true" />
+<script src="~/node_modules/vue-select/dist/vue-select.umd.js" asp-append-version="true"></script>
+```

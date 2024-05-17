@@ -7,6 +7,7 @@ using ElectronApp.Enums;
 using ElectronApp.Interfaces;
 using ElectronApp.Tools;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElectronApp.Areas.DepManage.Controllers
 {
@@ -20,7 +21,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
         private readonly DatabaseContext _context;
         private readonly IListService<ListViewModel, Departments> _listService;
         private readonly IEditService<fvmEdit, Departments> _editService;
-
+        private readonly IQueryService<Departments> _queryService;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -29,17 +30,20 @@ namespace ElectronApp.Areas.DepManage.Controllers
         /// <param name="context">The database context</param>
         /// <param name="listService">列表相關服務</param>
         /// <param name="editService">新增編輯相關服務</param>
+        /// <param name="queryService">查詢資料相關服務</param>
         public HomeController(IConfiguration configuration,
                               ILogger<HomeController> logger,
                               DatabaseContext context,
                               IListService<ListViewModel, Departments> listService,
-                              IEditService<fvmEdit, Departments> editService)
+                              IEditService<fvmEdit, Departments> editService,
+                              IQueryService<Departments> queryService)
             : base(configuration)
         {
             _logger = logger;
             _context = context;
             _listService = listService;
             _editService = editService;
+            _queryService = queryService;
         }
 
         /// <summary>
@@ -154,6 +158,19 @@ namespace ElectronApp.Areas.DepManage.Controllers
             var result = await _editService.Save(fvm);
 
             return HttpTool.CreateResponse(result);
+        }
+    
+        /// <summary>
+        /// 取得所有的部門資料
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GetAllDepData()
+        {
+            var result = await _queryService.FindAll().ToListAsync();
+
+            return Json(result);
         }
     }
 }

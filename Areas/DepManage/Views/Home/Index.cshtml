@@ -4,12 +4,40 @@
         nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.Index), 
         nameof(ElectronApp.Areas.DepManage.Controllers.HomeController).GetControllerName()
     );
+    //取得現有部門資料
+    var UrlAllDepData = Url.Action(nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.GetAllDepData).ReplaceAsyncEmpty());
 }
 
 @section Scripts {
+    <script>
+        let PageScope = {
+            Url: {
+                AllDepData: '@UrlAllDepData',
+            }
+        };
+    </script>
     <script type="module">
         import { ListViewModel } from "AreaDepManage/ListViewModel.js";
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", async function () {
+            // #region 取得共通資料
+            let AllDepData = []
+            try {
+                const response = await $.ajax({
+                    url: PageScope.Url.AllDepData,
+                    type: "POST",
+                    headers: {
+                        RequestVerificationToken: document.querySelector(
+                            "[name='__RequestVerificationToken']"
+                        ).value,
+                    },
+                });
+                response.unshift({ Name: "根節點", ID: 0 });
+                AllDepData = response;
+            } catch (err) {
+                console.error(err);
+            }
+            // #endregion 取得共通資料
+
             Vue.createApp({
                 components: {
                     "lc-grid": window.lcGridVue.LcGrid,
@@ -17,7 +45,8 @@
                 data () {
                     return {
                         searchRouterModel: new ListViewModel(),
-                        dataRows: {}
+                        dataRows: {},
+                        AllDepData: AllDepData,
                     };
                 },
                 async mounted () {
@@ -26,6 +55,15 @@
                     UpdateData (data) {
                         this.dataRows = data;
                     },
+                    GetDepNameById (id) {
+                        const dep = this.AllDepData.find(a => a.ID == id);
+                        if (dep) {
+                            return dep.Name;
+                        }
+                        else {
+                            return "";
+                        }
+                    }
                 }
             }).mount("#VueApp");
         });
@@ -83,7 +121,7 @@
                         <div class="col td" data-title="序號">{{ idx + 1 }}</div>
                         <div class="col td" data-title="部門名稱">{{ item.Name }}</div>
                         <div class="col td" data-title="縮寫">{{ item.Alias }}</div>
-                        <div class="col td" data-title="上層部門">{{ item.ParentID }}</div>
+                        <div class="col td" data-title="上層部門">{{ GetDepNameById(item.ParentID) }}</div>
                         <div class="col td" data-title="建立日期">{{ item.EstablishDate }}</div>
                         <div class="col td">
                             <a :href="`@(Url.Action("Edit"))/${item.ID}`">

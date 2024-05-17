@@ -9,7 +9,7 @@
             部門管理
             </summary>
         </member>
-        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Interfaces.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments})">
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Interfaces.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments})">
             <summary>
             Constructor
             </summary>
@@ -18,6 +18,7 @@
             <param name="context">The database context</param>
             <param name="listService">列表相關服務</param>
             <param name="editService">新增編輯相關服務</param>
+            <param name="queryService">查詢資料相關服務</param>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Index">
             <summary>
@@ -56,6 +57,12 @@
             <param name="fvm"></param>
             <returns></returns>
         </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.GetAllDepData">
+            <summary>
+            取得所有的部門資料
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.EditService`2">
             <summary>
             Departments相關操作
@@ -88,6 +95,29 @@
             <inheritdoc/>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.IQueryService`1">
+            <summary> 新增/編輯功能相關操作服務介面 </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.IQueryService`1.FindAll(System.Int32)">
+            <summary>
+            取得資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.QueryService`1">
+            <summary>
+            Departments相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.QueryService`1.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.QueryService`1.FindAll(System.Int32)">
             <inheritdoc/>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEdit">
