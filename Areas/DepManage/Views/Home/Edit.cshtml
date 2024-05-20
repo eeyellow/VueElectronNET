@@ -43,36 +43,41 @@
         // #region 取得共通資料
         let AllDepData = []
         try {
-            const response = await $.ajax({
-                url: PageScope.Url.AllDepData,
-                type: "POST",
+            let response = await fetch(PageScope.Url.AllDepData, {
+                method: "POST",
                 headers: {
-                    RequestVerificationToken: document.querySelector(
-                        "[name='__RequestVerificationToken']"
-                    ).value,
-                },
+                    "Content-Type": "application/json",
+                    "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
+                }
             });
-            response.unshift({ Name: "根節點", ID: 0 });
-            AllDepData = response;
-        } catch (err) {
-            console.error(err);
+            if (response.ok){
+                let data = await response.json();
+                data.unshift({ Name: "根節點", ID: 0 });
+                AllDepData = data;
+            }           
+        } catch (error) {
+            console.log(`Error: ${error}`);
         }
 
         let AllUserData = []
         try {
-            const response = await $.ajax({
-                url: PageScope.Url.UrlAllUserData,
-                type: "POST",
+            let response = await fetch(PageScope.Url.UrlAllUserData, {
+                method: "POST",
                 headers: {
-                    RequestVerificationToken: document.querySelector(
-                        "[name='__RequestVerificationToken']"
-                    ).value,
-                },
+                    "Content-Type": "application/json",
+                    "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
+                }
             });
-            AllUserData = response;
-        } catch (err) {
-            console.error(err);
+            if (response.ok) {
+                let data = await response.json();
+
+                AllUserData = data;
+            }
+        } catch (error) {
+            console.log(`Error: ${error}`);
         }
+
+        
         // #endregion 取得共通資料
         
         Vue.createApp({
@@ -86,28 +91,52 @@
                     ID: PageScope.ID,
                     VueMode: PageScope.VueMode,
                     VueModeEnum: VueModeEnum,
+                    AllDepData: [],
+                    AllUserData: [],
                 };
             },
-            computed: {
-                AllDepData: () => AllDepData,
-                AllUserData: () => AllUserData,
-            },
+            // computed: {
+            //     AllDepData: () => AllDepData,
+            //     AllUserData: () => AllUserData,
+            // },
             async beforeCreate () {
                 try {
-                    const response = await $.ajax({
-                        url: PageScope.Url.AllDepData,
-                        type: "POST",
+                    let response = await fetch(PageScope.Url.AllDepData, {
+                        method: "POST",
                         headers: {
-                            RequestVerificationToken: document.querySelector(
-                                "[name='__RequestVerificationToken']"
-                            ).value,
-                        },
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
+                        }
                     });
-                    response.unshift({ Name: "根節點", ID: 0 });
-                    this.AllDepData = response;
-                } catch (err) {
-                    console.error(err);
+                    if (response.ok) {
+                        let data = await response.json();
+                        data.unshift({ Name: "根節點", ID: 0 });
+                        this.AllDepData = data;
+                    }
+                } catch (error) {
+                    console.log(`Error: ${error}`);
                 }
+
+                
+
+                try {
+                    let response = await fetch(PageScope.Url.UrlAllUserData, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
+                        }
+                    });
+                    if (response.ok) {
+                        let data = await response.json();
+
+                        this.AllUserData = data;
+                    }
+                } catch (error) {
+                    console.log(`Error: ${error}`);
+                }
+
+
 
                 if (this.ID != 0) {
                     await this.getInitModel();
