@@ -41,41 +41,7 @@
         import { VueModeEnum } from "/js/TypeModules/Enums/EnumType.js";
 
         // #region 取得共通資料
-        let AllDepData = []
-        try {
-            let response = await fetch(PageScope.Url.AllDepData, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
-                }
-            });
-            if (response.ok){
-                let data = await response.json();
-                data.unshift({ Name: "根節點", ID: 0 });
-                AllDepData = data;
-            }           
-        } catch (error) {
-            console.log(`Error: ${error}`);
-        }
-
-        let AllUserData = []
-        try {
-            let response = await fetch(PageScope.Url.UrlAllUserData, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
-                }
-            });
-            if (response.ok) {
-                let data = await response.json();
-
-                AllUserData = data;
-            }
-        } catch (error) {
-            console.log(`Error: ${error}`);
-        }
+        
 
         
         // #endregion 取得共通資料
@@ -95,11 +61,8 @@
                     AllUserData: [],
                 };
             },
-            // computed: {
-            //     AllDepData: () => AllDepData,
-            //     AllUserData: () => AllUserData,
-            // },
             async beforeCreate () {
+                // #region 取得全部部門資料
                 try {
                     let response = await fetch(PageScope.Url.AllDepData, {
                         method: "POST",
@@ -110,15 +73,14 @@
                     });
                     if (response.ok) {
                         let data = await response.json();
-                        data.unshift({ Name: "根節點", ID: 0 });
                         this.AllDepData = data;
                     }
                 } catch (error) {
                     console.log(`Error: ${error}`);
                 }
+                // #endregion 取得全部部門資料
 
-                
-
+                // #region 取得全部人員資料
                 try {
                     let response = await fetch(PageScope.Url.UrlAllUserData, {
                         method: "POST",
@@ -135,8 +97,7 @@
                 } catch (error) {
                     console.log(`Error: ${error}`);
                 }
-
-
+                // #endregion 取得全部人員資料
 
                 if (this.ID != 0) {
                     await this.getInitModel();
