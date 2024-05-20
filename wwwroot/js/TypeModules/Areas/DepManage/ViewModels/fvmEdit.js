@@ -36,6 +36,11 @@ class fvmEdit {
      * @type {datetime}
      */
     EstablishDate;
+    /**
+     * 所屬人員ID清單
+     * @type {fvmEditUsers[]}
+     */
+    Users;
 
     /** 建構式 */
     constructor () {
@@ -51,6 +56,8 @@ class fvmEdit {
         this.ModelError__ParentID = '';
         this.EstablishDate = "";
         this.ModelError__EstablishDate = '';
+        this.Users = [];
+        this.ModelError__Users = '';
     }
 
     /** 
@@ -66,6 +73,7 @@ class fvmEdit {
             ['Alias',         'string'],
             ['ParentID',      'number'],
             ['EstablishDate', 'datetime'],
+            ['Users',         'fvmEditUsers[]'],
         ]);
         if (prop == undefined) {
             return propMap;

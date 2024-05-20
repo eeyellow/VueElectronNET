@@ -7,6 +7,9 @@
     var UrlPostData = Url.Action(nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.PostEditDataAsync).ReplaceAsyncEmpty());
     //取得現有部門資料
     var UrlAllDepData = Url.Action(nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.GetAllDepData).ReplaceAsyncEmpty());
+    //取得現有使用者資料
+    var UrlAllUserData = Url.Action(nameof(ElectronApp.Areas.DepManage.Controllers.HomeController.GetAllUserData).ReplaceAsyncEmpty());
+
 }
 
 @section Scripts {
@@ -16,6 +19,7 @@
                 DataSource: '@UrlDataSource',
                 PostData: '@UrlPostData',
                 AllDepData: '@UrlAllDepData',
+                UrlAllUserData: '@UrlAllUserData',
             },
             ID: '@Model.ID',
             VueMode: '@Model.VueMode',            
@@ -33,6 +37,7 @@
         } from "/js/GeneralTool.js";
         // ViewModel
         import { fvmEdit } from "/js/TypeModules/Areas/DepManage/ViewModels/fvmEdit.js";
+        import { fvmEditUsers } from "/js/TypeModules/Areas/DepManage/ViewModels/fvmEditUsers.js";
         import { VueModeEnum } from "/js/TypeModules/Enums/EnumType.js";
 
         // #region 取得共通資料
@@ -52,8 +57,24 @@
         } catch (err) {
             console.error(err);
         }
-        // #endregion 取得共通資料
 
+        let AllUserData = []
+        try {
+            const response = await $.ajax({
+                url: PageScope.Url.UrlAllUserData,
+                type: "POST",
+                headers: {
+                    RequestVerificationToken: document.querySelector(
+                        "[name='__RequestVerificationToken']"
+                    ).value,
+                },
+            });
+            AllUserData = response;
+        } catch (err) {
+            console.error(err);
+        }
+        // #endregion 取得共通資料
+        
         Vue.createApp({
             components: {
                 "lc-datepicker": window.VueDatePicker,
@@ -65,10 +86,29 @@
                     ID: PageScope.ID,
                     VueMode: PageScope.VueMode,
                     VueModeEnum: VueModeEnum,
-                    AllDepData: AllDepData,
                 };
             },
-            async created () {
+            computed: {
+                AllDepData: () => AllDepData,
+                AllUserData: () => AllUserData,
+            },
+            async beforeCreate () {
+                try {
+                    const response = await $.ajax({
+                        url: PageScope.Url.AllDepData,
+                        type: "POST",
+                        headers: {
+                            RequestVerificationToken: document.querySelector(
+                                "[name='__RequestVerificationToken']"
+                            ).value,
+                        },
+                    });
+                    response.unshift({ Name: "根節點", ID: 0 });
+                    this.AllDepData = response;
+                } catch (err) {
+                    console.error(err);
+                }
+
                 if (this.ID != 0) {
                     await this.getInitModel();
                 }
@@ -153,6 +193,23 @@
                         }
                     }
                 },
+                /** 新增人員 */
+                addUser () {
+                    this.ApplyData.Users.push(new fvmEditUsers());
+                },
+                removeUser (id) {
+                    const targetUser = this.ApplyData.Users.find(d => d.ID == id);
+                    const idx = this.ApplyData.Users.indexOf(targetUser);
+                    if (targetUser.ID == 0) {
+                        this.ApplyData.Users.splice(idx, 1);
+                    }
+                    else {
+                        targetUser.IsDelete = 1;
+                    }
+                },
+                updateUser (user, selected) {
+                    user.UserID = selected.UserID;
+                }
             }
         }).mount("#app");;
     </script>
@@ -180,7 +237,8 @@
         <lc-select 
             v-model="ApplyData.ParentID"
             :options="AllDepData"
-            :reduce="opt => opt.ID" 
+            :reduce="opt => opt.ID"
+            :clearable="false"
             label="Name" 
             placeholder="請選擇">
         </lc-select>
@@ -202,6 +260,29 @@
             {{ ApplyData.ModelError__EstablishDate }}
         </span>
     </div>
-
-    <button type="submit" class="btn btn-primary" v-on:click="postForm">Submit</button>
+    <div class="mb-3">
+        <label class="form-label">人員 
+            <button class="btn btn-warning" v-on:click="addUser"><i class="fa fa-plus"></i></button> 
+        </label>
+        <div class="row mb-2" v-for="(user, idx) in ApplyData.Users.filter(a => a.IsDelete == 0)">
+            <div class="col-11">
+                <lc-select v-model="user.UserID"
+                           :options="AllUserData"
+                           :reduce="opt => opt.ID"
+                           :clearable="false"
+                           label="Name"
+                           placeholder="請選擇"
+                           v-on:option:selected="(selected) => updateUser(user, selected)">
+                </lc-select>
+            </div>
+            <div class="col-1 text-end">
+                <button class="btn btn-danger" v-on:click="removeUser(user.ID)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 pt-5">
+        <button type="submit" class="btn btn-primary" v-on:click="postForm">Submit</button>
+    </div>
 </div>

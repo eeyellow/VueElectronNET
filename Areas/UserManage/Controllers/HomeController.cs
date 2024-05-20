@@ -18,8 +18,8 @@ namespace ElectronApp.Areas.UserManage.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly DatabaseContext _context;
-        private readonly IListService<ListViewModel, UserProfiles> _listService;
-        private readonly IEditService<fvmEdit, UserProfiles> _editService;
+        private readonly IBaseListService<ListViewModel, UserProfiles> _listService;
+        private readonly IBaseEditService<fvmEdit, UserProfiles> _editService;
 
         /// <summary>
         /// Constructor
@@ -32,8 +32,8 @@ namespace ElectronApp.Areas.UserManage.Controllers
         public HomeController(IConfiguration configuration,
                               ILogger<HomeController> logger,
                               DatabaseContext context,
-                              IListService<ListViewModel, UserProfiles> listService,
-                              IEditService<fvmEdit, UserProfiles> editService)
+                              IBaseListService<ListViewModel, UserProfiles> listService,
+                              IBaseEditService<fvmEdit, UserProfiles> editService)
             : base(configuration)
         {
             _logger = logger;
@@ -120,7 +120,7 @@ namespace ElectronApp.Areas.UserManage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GetEditDataAsync(int id)
         {
-            var entity = await _listService.FindByIdAsync(id);
+            var entity = await _editService.FindByIdAsync(id);
             if (entity == null)
             {
                 return NotFound();

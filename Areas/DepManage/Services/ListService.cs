@@ -1,10 +1,19 @@
-﻿using ElectronApp.Database.Contexts;
+﻿using ElectronApp.Areas.DepManage.ViewModels;
+using ElectronApp.Database.Contexts;
 using ElectronApp.Database.Entities;
 using ElectronApp.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectronApp.Areas.DepManage.Services
 {
+    /// <summary>
+    /// Departments相關操作介面
+    /// </summary>
+    public interface IListService<V, T> : IBaseListService<V, T>
+    {
+
+    }
+
     /// <summary>
     /// Departments相關操作
     /// </summary>
@@ -29,11 +38,8 @@ namespace ElectronApp.Areas.DepManage.Services
             return _context.Set<T>();
         }
 
-        /// <inheritdoc/>
-        public async Task<T> FindByIdAsync(int id)
-        {
-            var entity = await _context.Set<T>().FirstOrDefaultAsync(a => a.ID == id);
-            return entity;
-        }
+        
+
+        
     }
 }

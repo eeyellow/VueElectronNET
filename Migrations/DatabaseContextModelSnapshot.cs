@@ -15,7 +15,7 @@ namespace ElectronApp.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
 
             modelBuilder.Entity("ElectronApp.Database.Entities.Departments", b =>
                 {
@@ -66,6 +66,46 @@ namespace ElectronApp.Migrations
                     b.HasIndex("IsDelete");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("ElectronApp.Database.Entities.UserInDepartments", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasComment("流水號");
+
+                    b.Property<DateTime>("CreateDatetime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasDefaultValueSql("DateTime('now')")
+                        .HasComment("新增日期");
+
+                    b.Property<long>("DepartmentID")
+                        .HasColumnType("INTEGER")
+                        .HasComment("部門ID");
+
+                    b.Property<int>("IsDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValueSql("0")
+                        .HasComment("是否刪除");
+
+                    b.Property<DateTime>("UpdateDatetime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasDefaultValueSql("DateTime('now')")
+                        .HasComment("更新日期");
+
+                    b.Property<long>("UserID")
+                        .HasColumnType("INTEGER")
+                        .HasComment("人員ID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IsDelete");
+
+                    b.ToTable("UserInDepartments");
                 });
 
             modelBuilder.Entity("ElectronApp.Database.Entities.UserProfiles", b =>

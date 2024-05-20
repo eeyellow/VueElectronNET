@@ -1,5 +1,7 @@
+using ElectronApp.Areas.DepManage.ViewModels;
 using ElectronApp.Database.Contexts;
 using ElectronApp.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElectronApp.Areas.DepManage.Services
 {
@@ -13,6 +15,11 @@ namespace ElectronApp.Areas.DepManage.Services
         /// </summary>
         /// <returns></returns>
         IQueryable<T> FindAll(int isDelete = 0);
+        /// <summary>
+        /// 取得所有的使用者
+        /// </summary>
+        /// <returns></returns>
+        Task<List<fvmEditUsers>> FindUsersAsync();
     }
 
     /// <summary>
@@ -35,6 +42,23 @@ namespace ElectronApp.Areas.DepManage.Services
         public IQueryable<T> FindAll(int isDelete = 0)
         {
             return _context.Set<T>().Where(a => a.IsDelete == isDelete);
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<fvmEditUsers>> FindUsersAsync()
+        {
+            var entityList = await (
+                from user in _context.Set<UserProfiles>().Where(a => a.IsDelete == 0)
+                select new fvmEditUsers
+                {
+                    ID = user.ID,
+                    UserID = user.ID,
+                    Name = user.Name,
+                    IsDelete = user.IsDelete,
+                }
+            ).ToListAsync();
+
+            return entityList;
         }
     }
 }

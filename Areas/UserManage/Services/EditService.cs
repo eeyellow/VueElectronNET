@@ -13,7 +13,7 @@ namespace ElectronApp.Areas.UserManage.Services
     /// <summary>
     /// UserProfiles相關操作
     /// </summary>
-    public class EditService<U, T> : IEditService<U, T>
+    public class EditService<U, T> : IBaseEditService<U, T>
         where U : fvmEdit
         where T : ARecord
     {
@@ -105,6 +105,13 @@ namespace ElectronApp.Areas.UserManage.Services
             }
 
             return result;
+        }
+
+        /// <inheritdoc/>
+        public async Task<T> FindByIdAsync(int id)
+        {
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(a => a.ID == id);
+            return entity;
         }
     }
 }

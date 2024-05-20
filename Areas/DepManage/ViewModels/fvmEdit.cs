@@ -28,5 +28,25 @@ namespace ElectronApp.Areas.DepManage.ViewModels
         /// <summary> 成立日期 </summary>
         [DisplayName("成立日期")]
         public DateTime EstablishDate { get; set; }
+
+        /// <summary> 所屬人員ID清單 </summary>
+        public List<fvmEditUsers> Users { get; set; }
+    }
+
+    /// <summary>
+    /// 使用者ID
+    /// </summary>
+    public class fvmEditUsers
+    { 
+        /// <summary>流水號</summary>
+        public long ID { get; set; }
+        /// <summary>使用者ID</summary>
+        public long UserID { get; set; }
+        /// <summary>部門ID</summary>
+        public long DepartmentID { get; set; }
+        /// <summary>使用者名稱</summary>
+        public string Name { get; set; } 
+        /// <summary>是否刪除</summary>
+        public int IsDelete { get; set; }
     }
 }

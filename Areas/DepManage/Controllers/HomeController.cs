@@ -5,6 +5,7 @@ using ElectronApp.Database.Contexts;
 using ElectronApp.Database.Entities;
 using ElectronApp.Enums;
 using ElectronApp.Interfaces;
+
 using ElectronApp.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
         private readonly DatabaseContext _context;
         private readonly IListService<ListViewModel, Departments> _listService;
         private readonly IEditService<fvmEdit, Departments> _editService;
+        private readonly IEditUserService<fvmEditUsers, UserInDepartments> _editUserService;
         private readonly IQueryService<Departments> _queryService;
         /// <summary>
         /// Constructor
@@ -30,12 +32,14 @@ namespace ElectronApp.Areas.DepManage.Controllers
         /// <param name="context">The database context</param>
         /// <param name="listService">列表相關服務</param>
         /// <param name="editService">新增編輯相關服務</param>
+        /// <param name="editUserService">新增編輯User關聯相關服務</param>
         /// <param name="queryService">查詢資料相關服務</param>
         public HomeController(IConfiguration configuration,
                               ILogger<HomeController> logger,
                               DatabaseContext context,
                               IListService<ListViewModel, Departments> listService,
                               IEditService<fvmEdit, Departments> editService,
+                              IEditUserService<fvmEditUsers, UserInDepartments> editUserService,
                               IQueryService<Departments> queryService)
             : base(configuration)
         {
@@ -43,6 +47,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
             _context = context;
             _listService = listService;
             _editService = editService;
+            _editUserService = editUserService;
             _queryService = queryService;
         }
 
@@ -126,13 +131,16 @@ namespace ElectronApp.Areas.DepManage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GetEditDataAsync(int id)
         {
-            var entity = await _listService.FindByIdAsync(id);
+            var entity = await _editService.FindByIdAsync(id);
             if (entity == null)
             {
                 return NotFound();
             }
 
             var model = ModelTool.MappingAndReturn(entity, new fvmEdit(), []);
+
+            model.Users = await _editService.FindUsersByIdAsync(id);
+
             model.VueMode = (int)VueModeEnum.Edit;
 
             return Json(model);
@@ -157,6 +165,14 @@ namespace ElectronApp.Areas.DepManage.Controllers
 
             var result = await _editService.Save(fvm);
 
+            
+            foreach (var user in fvm.Users ?? new List<fvmEditUsers>())
+
+            {
+                user.DepartmentID = ((Departments)result.Data).ID;
+                await _editUserService.Save(user);
+            }
+
             return HttpTool.CreateResponse(result);
         }
     
@@ -169,6 +185,19 @@ namespace ElectronApp.Areas.DepManage.Controllers
         public async Task<IActionResult> GetAllDepData()
         {
             var result = await _queryService.FindAll().ToListAsync();
+
+            return Json(result);
+        }
+
+        /// <summary>
+        /// 取得所有的使用者資料
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GetAllUserData()
+        {
+            var result = await _queryService.FindUsersAsync();
 
             return Json(result);
         }

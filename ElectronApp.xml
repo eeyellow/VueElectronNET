@@ -9,7 +9,7 @@
             部門管理
             </summary>
         </member>
-        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Interfaces.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments})">
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Areas.DepManage.Services.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditUserService{ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers,ElectronApp.Database.Entities.UserInDepartments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments})">
             <summary>
             Constructor
             </summary>
@@ -18,6 +18,7 @@
             <param name="context">The database context</param>
             <param name="listService">列表相關服務</param>
             <param name="editService">新增編輯相關服務</param>
+            <param name="editUserService">新增編輯User關聯相關服務</param>
             <param name="queryService">查詢資料相關服務</param>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Index">
@@ -63,6 +64,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.GetAllUserData">
+            <summary>
+            取得所有的使用者資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.IEditService`2">
+            <summary>
+            Departments相關操作介面
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.IEditService`2.FindUsersByIdAsync(System.Int32)">
+            <summary>
+            取得關聯的使用者
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.EditService`2">
             <summary>
             Departments相關操作
@@ -80,6 +99,42 @@
         <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.Save(`0)">
             <inheritdoc/>
         </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.FindUsersByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.IEditUserService`2">
+            <summary>
+            Departments相關操作介面
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.EditUserService`2">
+            <summary>
+            Departments相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditUserService`2.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditUserService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditUserService`2.Save(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditUserService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.IListService`2">
+            <summary>
+            Departments相關操作介面
+            </summary>
+        </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.ListService`2">
             <summary>
             Departments相關操作
@@ -94,15 +149,18 @@
         <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.FilterBySearch(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.FindByIdAsync(System.Int32)">
-            <inheritdoc/>
-        </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.IQueryService`1">
             <summary> 新增/編輯功能相關操作服務介面 </summary>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Services.IQueryService`1.FindAll(System.Int32)">
             <summary>
             取得資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.IQueryService`1.FindUsersAsync">
+            <summary>
+            取得所有的使用者
             </summary>
             <returns></returns>
         </member>
@@ -118,6 +176,9 @@
             <param name="context"></param>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Services.QueryService`1.FindAll(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.QueryService`1.FindUsersAsync">
             <inheritdoc/>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEdit">
@@ -142,6 +203,29 @@
         </member>
         <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.EstablishDate">
             <summary> 成立日期 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.Users">
+            <summary> 所屬人員ID清單 </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers">
+            <summary>
+            使用者ID
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers.ID">
+            <summary>流水號</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers.UserID">
+            <summary>使用者ID</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers.DepartmentID">
+            <summary>部門ID</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers.Name">
+            <summary>使用者名稱</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers.IsDelete">
+            <summary>是否刪除</summary>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.ListViewModel">
             <summary>
@@ -171,7 +255,7 @@
             使用者帳號管理
             </summary>
         </member>
-        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.UserManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IListService{ElectronApp.Areas.UserManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.UserProfiles},ElectronApp.Interfaces.IEditService{ElectronApp.Areas.UserManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.UserProfiles})">
+        <member name="M:ElectronApp.Areas.UserManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.UserManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Interfaces.IBaseListService{ElectronApp.Areas.UserManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.UserProfiles},ElectronApp.Interfaces.IBaseEditService{ElectronApp.Areas.UserManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.UserProfiles})">
             <summary>
             Constructor
             </summary>
@@ -235,6 +319,9 @@
         <member name="M:ElectronApp.Areas.UserManage.Services.EditService`2.Save(`0)">
             <inheritdoc/>
         </member>
+        <member name="M:ElectronApp.Areas.UserManage.Services.EditService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
         <member name="T:ElectronApp.Areas.UserManage.Services.ListService`2">
             <summary>
             UserProfiles相關操作
@@ -247,9 +334,6 @@
             <param name="context"></param>
         </member>
         <member name="M:ElectronApp.Areas.UserManage.Services.ListService`2.FilterBySearch(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:ElectronApp.Areas.UserManage.Services.ListService`2.FindByIdAsync(System.Int32)">
             <inheritdoc/>
         </member>
         <member name="T:ElectronApp.Areas.UserManage.ViewModels.fvmEdit">
@@ -643,17 +727,24 @@
         <member name="F:ElectronApp.Enums.VueModeEnum.Detail">
             <summary> 檢視 </summary>
         </member>
-        <member name="T:ElectronApp.Interfaces.IEditService`2">
+        <member name="T:ElectronApp.Interfaces.IBaseEditService`2">
             <summary> 新增/編輯功能相關操作服務介面 </summary>
         </member>
-        <member name="M:ElectronApp.Interfaces.IEditService`2.Save(`0)">
+        <member name="M:ElectronApp.Interfaces.IBaseEditService`2.FindByIdAsync(System.Int32)">
+            <summary>
+            依ID尋找
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Interfaces.IBaseEditService`2.Save(`0)">
             <summary>
             儲存變更
             </summary>
             <param name="fvm"></param>
             <returns></returns>
         </member>
-        <member name="M:ElectronApp.Interfaces.IEditService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+        <member name="M:ElectronApp.Interfaces.IBaseEditService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
             <summary>
             驗證
             </summary>
@@ -661,21 +752,14 @@
             <param name="modelState"></param>
             <returns></returns>
         </member>
-        <member name="T:ElectronApp.Interfaces.IListService`2">
+        <member name="T:ElectronApp.Interfaces.IBaseListService`2">
             <summary> 列表功能相關操作服務介面 </summary>
         </member>
-        <member name="M:ElectronApp.Interfaces.IListService`2.FilterBySearch(`0)">
+        <member name="M:ElectronApp.Interfaces.IBaseListService`2.FilterBySearch(`0)">
             <summary>
             列表搜尋篩選
             </summary>
             <param name="fvm"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ElectronApp.Interfaces.IListService`2.FindByIdAsync(System.Int32)">
-            <summary>
-            依ID尋找
-            </summary>
-            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:ElectronApp.Interfaces.IPager">
@@ -751,18 +835,6 @@
         <member name="M:ElectronApp.Migrations.Departments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:ElectronApp.Migrations.UserInDepartment">
-            <inheritdoc />
-        </member>
-        <member name="M:ElectronApp.Migrations.UserInDepartment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ElectronApp.Migrations.UserInDepartment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ElectronApp.Migrations.UserInDepartment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
         <member name="T:ElectronApp.Migrations.DepartmentsEstablishDate">
             <inheritdoc />
         </member>
@@ -785,6 +857,18 @@
             <inheritdoc />
         </member>
         <member name="M:ElectronApp.Migrations.DatetimeTypeChange.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.UserInDeparments">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UserInDeparments.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UserInDeparments.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UserInDeparments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:ElectronApp.Program">
