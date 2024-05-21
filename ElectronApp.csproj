@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\DepManage\Enums\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>

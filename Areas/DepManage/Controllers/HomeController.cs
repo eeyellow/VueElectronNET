@@ -23,6 +23,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
         private readonly IListService<ListViewModel, Departments> _listService;
         private readonly IEditService<fvmEdit, Departments> _editService;
         private readonly IEditUserService<fvmEditUsers, UserInDepartments> _editUserService;
+        private readonly IEditEarthlyBranchService<fvmEarthlyBranch, EarthlyBranchInDepartments> _editEarthlyBranchService;
         private readonly IQueryService<Departments> _queryService;
         /// <summary>
         /// Constructor
@@ -33,6 +34,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
         /// <param name="listService">列表相關服務</param>
         /// <param name="editService">新增編輯相關服務</param>
         /// <param name="editUserService">新增編輯User關聯相關服務</param>
+        /// <param name="editEarthlyBranchService">新增編輯EarthlyBranch關聯相關服務</param>
         /// <param name="queryService">查詢資料相關服務</param>
         public HomeController(IConfiguration configuration,
                               ILogger<HomeController> logger,
@@ -40,6 +42,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
                               IListService<ListViewModel, Departments> listService,
                               IEditService<fvmEdit, Departments> editService,
                               IEditUserService<fvmEditUsers, UserInDepartments> editUserService,
+                              IEditEarthlyBranchService<fvmEarthlyBranch, EarthlyBranchInDepartments> editEarthlyBranchService,
                               IQueryService<Departments> queryService)
             : base(configuration)
         {
@@ -48,6 +51,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
             _listService = listService;
             _editService = editService;
             _editUserService = editUserService;
+            _editEarthlyBranchService = editEarthlyBranchService;
             _queryService = queryService;
         }
 
@@ -156,6 +160,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
             var model = ModelTool.MappingAndReturn(entity, new fvmEdit(), []);
 
             model.Users = await _editService.FindUsersByIdAsync(id);
+            model.EarthlyBranch = await _editService.FindEarthlyBranchByIdAsync(id);
 
             model.VueMode = (int)VueModeEnum.Edit;
 
@@ -182,11 +187,16 @@ namespace ElectronApp.Areas.DepManage.Controllers
             var result = await _editService.Save(fvm);
 
             
-            foreach (var user in fvm.Users ?? new List<fvmEditUsers>())
-
+            foreach (var item in fvm.Users ?? new List<fvmEditUsers>())
             {
-                user.DepartmentID = ((Departments)result.Data).ID;
-                await _editUserService.Save(user);
+                item.DepartmentID = ((Departments)result.Data).ID;
+                await _editUserService.Save(item);
+            }
+
+            foreach (var item in fvm.EarthlyBranch ?? new List<fvmEarthlyBranch>())
+            {
+                item.DepartmentID = ((Departments)result.Data).ID;
+                await _editEarthlyBranchService.Save(item);
             }
 
             return HttpTool.CreateResponse(result);

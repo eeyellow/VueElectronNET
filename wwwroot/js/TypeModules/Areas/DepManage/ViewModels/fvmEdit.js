@@ -46,6 +46,11 @@ class fvmEdit {
      * @type {number}
      */
     IsEnable;
+    /**
+     * 地支
+     * @type {fvmEarthlyBranch[]}
+     */
+    EarthlyBranch;
 
     /** 建構式 */
     constructor () {
@@ -65,6 +70,8 @@ class fvmEdit {
         this.ModelError__Users = '';
         this.IsEnable = 0;
         this.ModelError__IsEnable = '';
+        this.EarthlyBranch = [];
+        this.ModelError__EarthlyBranch = '';
     }
 
     /** 
@@ -82,6 +89,7 @@ class fvmEdit {
             ['EstablishDate', 'datetime'],
             ['Users',         'fvmEditUsers[]'],
             ['IsEnable',      'number'],
+            ['EarthlyBranch', 'fvmEarthlyBranch[]'],
         ]);
         if (prop == undefined) {
             return propMap;

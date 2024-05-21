@@ -37,6 +37,10 @@ namespace ElectronApp.Areas.DepManage.ViewModels
         /// <summary> 是否啟用 </summary>
         [DisplayName("是否啟用")]
         public int IsEnable { get; set; }
+
+        /// <summary> 地支 </summary>
+        [DisplayName("地支")]
+        public List<fvmEarthlyBranch> EarthlyBranch { get; set; }
     }
 
     /// <summary>
@@ -52,6 +56,21 @@ namespace ElectronApp.Areas.DepManage.ViewModels
         public long DepartmentID { get; set; }
         /// <summary>使用者名稱</summary>
         public string Name { get; set; } 
+        /// <summary>是否刪除</summary>
+        public int IsDelete { get; set; }
+    }
+
+    /// <summary>
+    /// 地支ID
+    /// </summary>
+    public class fvmEarthlyBranch
+    {
+        /// <summary>流水號</summary>
+        public long ID { get; set; }
+        /// <summary>地支ID</summary>
+        public int EnumValue { get; set; }
+        /// <summary>部門ID</summary>
+        public long DepartmentID { get; set; }
         /// <summary>是否刪除</summary>
         public int IsDelete { get; set; }
     }

@@ -9,7 +9,7 @@
             部門管理
             </summary>
         </member>
-        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Areas.DepManage.Services.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditUserService{ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers,ElectronApp.Database.Entities.UserInDepartments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments})">
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Areas.DepManage.Services.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditUserService{ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers,ElectronApp.Database.Entities.UserInDepartments},ElectronApp.Areas.DepManage.Services.IEditEarthlyBranchService{ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch,ElectronApp.Database.Entities.EarthlyBranchInDepartments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments})">
             <summary>
             Constructor
             </summary>
@@ -19,6 +19,7 @@
             <param name="listService">列表相關服務</param>
             <param name="editService">新增編輯相關服務</param>
             <param name="editUserService">新增編輯User關聯相關服務</param>
+            <param name="editEarthlyBranchService">新增編輯EarthlyBranch關聯相關服務</param>
             <param name="queryService">查詢資料相關服務</param>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Index">
@@ -76,10 +77,118 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum">
+            <summary>
+            地支 列舉
+            </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.A">
+            <summary> 子 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.B">
+            <summary> 丑 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.C">
+            <summary> 寅 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.D">
+            <summary> 卯 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.E">
+            <summary> 辰 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.F">
+            <summary> 巳 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.G">
+            <summary> 午 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.H">
+            <summary> 未 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.I">
+            <summary> 申 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.J">
+            <summary> 酉 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.K">
+            <summary> 戌 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.EarthlyBranchesEnum.L">
+            <summary> 亥 </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum">
+            <summary>
+            天干 列舉
+            </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.A">
+            <summary> 甲 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.B">
+            <summary> 乙 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.C">
+            <summary> 丙 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.D">
+            <summary> 丁 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.E">
+            <summary> 戊 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.F">
+            <summary> 己 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.G">
+            <summary> 庚 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.H">
+            <summary> 辛 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.I">
+            <summary> 壬 </summary>
+        </member>
+        <member name="F:ElectronApp.Areas.DepManage.Enums.HeavenlyStemsEnum.J">
+            <summary> 癸 </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.IEditEarthlyBranchService`2">
+            <summary>
+            Departments相關操作介面
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.Services.EditEarthlyBranchService`2">
+            <summary>
+            Departments相關操作
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditEarthlyBranchService`2.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditEarthlyBranchService`2.Valid(`0,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditEarthlyBranchService`2.Save(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditEarthlyBranchService`2.FindByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.IEditService`2">
             <summary>
             Departments相關操作介面
             </summary>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.IEditService`2.FindEarthlyBranchByIdAsync(System.Int32)">
+            <summary>
+            取得關聯的地支
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Services.IEditService`2.FindUsersByIdAsync(System.Int32)">
             <summary>
@@ -109,6 +218,9 @@
             <inheritdoc/>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.FindUsersByIdAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.EditService`2.FindEarthlyBranchByIdAsync(System.Int32)">
             <inheritdoc/>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.IEditUserService`2">
@@ -216,6 +328,9 @@
         <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.IsEnable">
             <summary> 是否啟用 </summary>
         </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.EarthlyBranch">
+            <summary> 地支 </summary>
+        </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers">
             <summary>
             使用者ID
@@ -234,6 +349,23 @@
             <summary>使用者名稱</summary>
         </member>
         <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers.IsDelete">
+            <summary>是否刪除</summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch">
+            <summary>
+            地支ID
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch.ID">
+            <summary>流水號</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch.EnumValue">
+            <summary>地支ID</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch.DepartmentID">
+            <summary>部門ID</summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch.IsDelete">
             <summary>是否刪除</summary>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.ListViewModel">
@@ -454,6 +586,9 @@
         <member name="P:ElectronApp.Database.Contexts.DatabaseContext.UserInDepartments">
             <summary> 人員與部門的關聯表 </summary>
         </member>
+        <member name="P:ElectronApp.Database.Contexts.DatabaseContext.EarthlyBranchInDepartments">
+            <summary> 地支與部門的關聯表 </summary>
+        </member>
         <member name="M:ElectronApp.Database.Contexts.DatabaseContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ElectronApp.Database.Contexts.DatabaseContext})">
             <summary>
             建構式
@@ -494,6 +629,21 @@
         <member name="P:ElectronApp.Database.Entities.Departments.IsEnable">
             <summary>
             是否啟用
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.EarthlyBranchInDepartments">
+            <summary>
+            地支與部門的關聯表
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.EarthlyBranchInDepartments.EnumValue">
+            <summary>
+            地支列舉值
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.EarthlyBranchInDepartments.DepartmentID">
+            <summary>
+            部門名稱
             </summary>
         </member>
         <member name="T:ElectronApp.Database.Entities.UserInDepartments">
@@ -895,6 +1045,18 @@
             <inheritdoc />
         </member>
         <member name="M:ElectronApp.Migrations.DepartmentsIsEnable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.EarthlyBranchInDepartments">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.EarthlyBranchInDepartments.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.EarthlyBranchInDepartments.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.EarthlyBranchInDepartments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:ElectronApp.Program">

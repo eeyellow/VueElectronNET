@@ -15,6 +15,8 @@ namespace ElectronApp.Database.Contexts
         public virtual DbSet<Departments> Departments { get; set; }
         /// <summary> 人員與部門的關聯表 </summary>
         public virtual DbSet<UserInDepartments> UserInDepartments { get; set; }
+        /// <summary> 地支與部門的關聯表 </summary>
+        public virtual DbSet<EarthlyBranchInDepartments> EarthlyBranchInDepartments { get; set; }
 
         /// <summary>
         /// 建構式

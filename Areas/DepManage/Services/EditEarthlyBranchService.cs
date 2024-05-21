@@ -12,28 +12,16 @@ namespace ElectronApp.Areas.DepManage.Services
     /// <summary>
     /// Departments相關操作介面
     /// </summary>
-    public interface IEditService<U, T> : IBaseEditService<U, T>
+    public interface IEditEarthlyBranchService<U, T> : IBaseEditService<U, T>
     {
-        /// <summary>
-        /// 取得關聯的地支
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<List<fvmEarthlyBranch>> FindEarthlyBranchByIdAsync(int id);
-
-        /// <summary>
-        /// 取得關聯的使用者
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<List<fvmEditUsers>> FindUsersByIdAsync(int id);
+        
     }
 
     /// <summary>
     /// Departments相關操作
     /// </summary>
-    public class EditService<U, T> : IEditService<U, T>
-        where U : fvmEdit
+    public class EditEarthlyBranchService<U, T> : IEditEarthlyBranchService<U, T>
+        where U : fvmEarthlyBranch
         where T : ARecord
     {
         private readonly DatabaseContext _context;
@@ -42,7 +30,7 @@ namespace ElectronApp.Areas.DepManage.Services
         /// 建構式
         /// </summary>
         /// <param name="context"></param>
-        public EditService(DatabaseContext context)
+        public EditEarthlyBranchService(DatabaseContext context)
         {
             _context = context;
         }
@@ -50,11 +38,6 @@ namespace ElectronApp.Areas.DepManage.Services
         /// <inheritdoc/>
         public ModelStateViewModel Valid(U fvm, ModelStateDictionary modelState)
         {
-            if (string.IsNullOrWhiteSpace(fvm.Name))
-            {
-                modelState.AddModelError("Name", "名稱不可為空");
-            }
-
             var result = new ModelStateViewModel
             {
                 StatusCode = modelState.IsValid ? 200 : 400,
@@ -121,49 +104,9 @@ namespace ElectronApp.Areas.DepManage.Services
         }
 
         /// <inheritdoc/>
-        public async Task<T> FindByIdAsync(int id)
+        public Task<T> FindByIdAsync(int id)
         {
-            var entity = await _context.Set<T>().FirstOrDefaultAsync(a => a.ID == id);
-            return entity;
-        }
-
-        /// <inheritdoc/>
-        public async Task<List<fvmEditUsers>> FindUsersByIdAsync(int id)
-        {
-            var entityList = await (
-                from rel in _context.Set<UserInDepartments>().Where(a => a.IsDelete == 0)
-                join user in _context.Set<UserProfiles>().Where(a => a.IsDelete == 0)
-                    on rel.UserID equals user.ID
-                where rel.DepartmentID == id
-                select new fvmEditUsers
-                {
-                    ID = rel.ID,
-                    UserID = rel.UserID,
-                    DepartmentID = rel.DepartmentID,
-                    Name = user.Name,
-                    IsDelete = user.IsDelete,
-                }
-            ).ToListAsync();
-
-            return entityList;
-        }
-
-        /// <inheritdoc/>
-        public async Task<List<fvmEarthlyBranch>> FindEarthlyBranchByIdAsync(int id)
-        {
-            var entityList = await (
-                from entity in _context.Set<EarthlyBranchInDepartments>().Where(a => a.IsDelete == 0)
-                where entity.DepartmentID == id
-                select new fvmEarthlyBranch
-                {
-                    ID = entity.ID,
-                    EnumValue = entity.EnumValue,
-                    DepartmentID = entity.DepartmentID,
-                    IsDelete = entity.IsDelete,
-                }
-            ).ToListAsync();
-
-            return entityList;
+            throw new NotImplementedException();
         }
     }
 }
