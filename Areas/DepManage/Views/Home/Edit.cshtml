@@ -187,6 +187,7 @@
                 addUser () {
                     this.ApplyData.Users.push(new fvmEditUsers());
                 },
+                /** 移除人員*/
                 removeUser (id) {
                     const targetUser = this.ApplyData.Users.find(d => d.ID == id);
                     const idx = this.ApplyData.Users.indexOf(targetUser);
@@ -197,6 +198,7 @@
                         targetUser.IsDelete = 1;
                     }
                 },
+                /** 編輯人員 */
                 updateUser (user, selected) {
                     user.UserID = selected.UserID;
                 }
@@ -269,6 +271,24 @@
                 <button class="btn btn-danger" v-on:click="removeUser(user.ID)">
                     <i class="fa fa-trash"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">
+            是否啟用
+        </label>
+        <div class="mb-2">
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" type="radio" id="IsEnable_1" name="IsEnable" 
+                    value="1" v-model="ApplyData.IsEnable">
+                <label class="form-check-label" for="IsEnable_1">啟用</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="IsEnable_0" name="IsEnable" 
+                    value="0" v-model="ApplyData.IsEnable">
+                <label class="form-check-label" for="IsEnable_0">停用</label>
             </div>
         </div>
     </div>

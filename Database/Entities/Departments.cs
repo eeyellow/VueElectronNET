@@ -44,5 +44,13 @@ namespace ElectronApp.Database.Entities
         [SqlDefaultValue("DateTime('now')")]
         [Description("成立日期")]
         public DateTime EstablishDate { get; set; }
+
+        /// <summary>
+        /// 是否啟用
+        /// </summary>
+        [Comment("是否啟用")]
+        [SqlDefaultValue("1")]
+        [Description("是否啟用")]
+        public int IsEnable { get; set; } = 1;
     }
 }

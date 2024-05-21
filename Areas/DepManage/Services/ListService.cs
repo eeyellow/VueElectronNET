@@ -35,7 +35,17 @@ namespace ElectronApp.Areas.DepManage.Services
         /// <inheritdoc/>
         public IQueryable<T> FilterBySearch(V fvm)
         {
-            return _context.Set<T>();
+            var query = _context.Set<T>();
+
+            // 使用反射取得ByKeyword屬性的值
+            var byKeywordProperty = fvm.GetType().GetProperty("ByKeyword");
+            if (byKeywordProperty != null)
+            {
+                var byKeywordValue = byKeywordProperty.GetValue(fvm);
+                // 在這裡可以使用byKeywordValue來進行後續的處理
+            }
+
+            return query;
         }
 
         

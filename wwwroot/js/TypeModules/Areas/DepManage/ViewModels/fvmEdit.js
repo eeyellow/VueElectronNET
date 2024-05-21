@@ -37,10 +37,15 @@ class fvmEdit {
      */
     EstablishDate;
     /**
-     * 所屬人員ID清單
+     * 人員
      * @type {fvmEditUsers[]}
      */
     Users;
+    /**
+     * 是否啟用
+     * @type {number}
+     */
+    IsEnable;
 
     /** 建構式 */
     constructor () {
@@ -58,6 +63,8 @@ class fvmEdit {
         this.ModelError__EstablishDate = '';
         this.Users = [];
         this.ModelError__Users = '';
+        this.IsEnable = 0;
+        this.ModelError__IsEnable = '';
     }
 
     /** 
@@ -74,6 +81,7 @@ class fvmEdit {
             ['ParentID',      'number'],
             ['EstablishDate', 'datetime'],
             ['Users',         'fvmEditUsers[]'],
+            ['IsEnable',      'number'],
         ]);
         if (prop == undefined) {
             return propMap;

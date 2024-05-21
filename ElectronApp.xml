@@ -205,7 +205,10 @@
             <summary> 成立日期 </summary>
         </member>
         <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.Users">
-            <summary> 所屬人員ID清單 </summary>
+            <summary> 人員 </summary>
+        </member>
+        <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEdit.IsEnable">
+            <summary> 是否啟用 </summary>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers">
             <summary>
@@ -481,6 +484,11 @@
             <summary>
             成立日期
             </summary> 
+        </member>
+        <member name="P:ElectronApp.Database.Entities.Departments.IsEnable">
+            <summary>
+            是否啟用
+            </summary>
         </member>
         <member name="T:ElectronApp.Database.Entities.UserInDepartments">
             <summary>
@@ -869,6 +877,18 @@
             <inheritdoc />
         </member>
         <member name="M:ElectronApp.Migrations.UserInDeparments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ElectronApp.Migrations.DepartmentsIsEnable">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DepartmentsIsEnable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DepartmentsIsEnable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.DepartmentsIsEnable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:ElectronApp.Program">

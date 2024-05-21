@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using ElectronApp.Migrations;
+using System.ComponentModel;
 
 namespace ElectronApp.Areas.DepManage.ViewModels
 {
@@ -29,8 +30,13 @@ namespace ElectronApp.Areas.DepManage.ViewModels
         [DisplayName("成立日期")]
         public DateTime EstablishDate { get; set; }
 
-        /// <summary> 所屬人員ID清單 </summary>
+        /// <summary> 人員 </summary>
+        [DisplayName("人員")]
         public List<fvmEditUsers> Users { get; set; }
+
+        /// <summary> 是否啟用 </summary>
+        [DisplayName("是否啟用")]
+        public int IsEnable { get; set; }
     }
 
     /// <summary>
