@@ -124,6 +124,22 @@ namespace ElectronApp.Areas.DepManage.Controllers
         }
 
         /// <summary>
+        /// 檢視頁
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            var model = new fvmEdit
+            {
+                ID = id,
+                VueMode = (int)VueModeEnum.Detail
+            };
+
+            return View("Edit", model);
+        }
+
+        /// <summary>
         /// 編輯頁 - 取得資料
         /// </summary>
         /// <returns></returns>

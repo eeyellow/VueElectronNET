@@ -45,6 +45,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Detail(System.Int32)">
+            <summary>
+            檢視頁
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.GetEditDataAsync(System.Int32)">
             <summary>
             編輯頁 - 取得資料

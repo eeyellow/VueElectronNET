@@ -119,7 +119,11 @@
                 <template v-for="(item, idx) in dataRows" :key="item">
                     <div class="row list-body">
                         <div class="col td" data-title="序號">{{ idx + 1 }}</div>
-                        <div class="col td" data-title="部門名稱">{{ item.Name }}</div>
+                        <div class="col td" data-title="部門名稱">
+                            <a :href="`@(Url.Action("Detail"))/${item.ID}`">
+                                {{ item.Name }}
+                            </a>
+                        </div>
                         <div class="col td" data-title="縮寫">{{ item.Alias }}</div>
                         <div class="col td" data-title="上層部門">{{ GetDepNameById(item.ParentID) }}</div>
                         <div class="col td" data-title="建立日期">{{ item.EstablishDate }}</div>
