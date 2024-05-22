@@ -253,6 +253,13 @@
             Departments相關操作介面
             </summary>
         </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.IListService`2.GetListModel(System.Linq.IQueryable{ElectronApp.Database.Entities.Departments})">
+            <summary>
+            取得列表模型
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.ListService`2">
             <summary>
             Departments相關操作
@@ -265,6 +272,9 @@
             <param name="context"></param>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.FilterBySearch(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ElectronApp.Areas.DepManage.Services.ListService`2.GetListModel(System.Linq.IQueryable{ElectronApp.Database.Entities.Departments})">
             <inheritdoc/>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.Services.IQueryService`1">
@@ -367,6 +377,11 @@
         </member>
         <member name="P:ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch.IsDelete">
             <summary>是否刪除</summary>
+        </member>
+        <member name="T:ElectronApp.Areas.DepManage.ViewModels.fvmList">
+            <summary>
+            fvmList
+            </summary>
         </member>
         <member name="T:ElectronApp.Areas.DepManage.ViewModels.ListViewModel">
             <summary>

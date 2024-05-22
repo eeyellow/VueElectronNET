@@ -77,7 +77,9 @@ namespace ElectronApp.Areas.DepManage.Controllers
             }
 
             // 搜尋
-            var list = _listService.FilterBySearch(fvm);
+            var query = _listService.FilterBySearch(fvm);
+            var list = _listService.GetListModel(query);
+
             // 排序 & 分頁
             var pageList = await GetPagedListAsync(fvm, list);
 
@@ -88,7 +90,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
                                  ID = e.ID,
                                  Name = e.Name,
                                  Alias = e.Alias,
-                                 ParentID = e.ParentID,
+                                 ParentDepName = e.ParentDepName,
                                  EstablishDate = e.EstablishDate.ToString("yyyy/MM/dd")
                              };
 

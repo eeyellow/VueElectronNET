@@ -11,7 +11,12 @@ namespace ElectronApp.Areas.DepManage.Services
     /// </summary>
     public interface IListService<V, T> : IBaseListService<V, T>
     {
-
+        /// <summary>
+        /// 取得列表模型
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IQueryable<fvmList> GetListModel(IQueryable<Departments> query);
     }
 
     /// <summary>
@@ -48,8 +53,24 @@ namespace ElectronApp.Areas.DepManage.Services
             return query;
         }
 
-        
+        /// <inheritdoc/>
+        public IQueryable<fvmList> GetListModel (IQueryable<Departments> query)
+        {
+            var result = (
+                from q in query
+                join parent in _context.Set<Departments>() 
+                    on q.ParentID equals parent.ID
+                select new fvmList
+                {
+                    ID = q.ID,
+                    Alias = q.Alias,
+                    Name = q.Name,
+                    ParentDepName = parent.Name,
+                    EstablishDate = q.EstablishDate,
+                }
+            );
 
-        
+            return result;
+        }
     }
 }

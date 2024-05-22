@@ -7,6 +7,6 @@ namespace ElectronApp.Areas.DepManage.ViewModels
     /// </summary>
     public class ListViewModel : BaseSearchViewModel
     {
-        
+
     }
 }
