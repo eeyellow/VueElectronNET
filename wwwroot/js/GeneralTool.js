@@ -173,13 +173,23 @@ function TransformMapping (sourceValue, type) {
 
 /**
  * 將JSON物件轉為FormData
- * @param {any} object
- * @returns
+ * @param {*} object 
+ * @param {*} formData 
+ * @param {*} parentKey 
+ * @returns 
  */
-export function GetFormData (object) {
-    const formData = new FormData();
+export function GetFormData(object, formData = new FormData(), parentKey = '') {
     if (object !== null && typeof object === 'object') {
-        Object.keys(object).forEach(key => formData.append(key, object[key]));
+        Object.keys(object).forEach(key => {
+            const fullKey = parentKey ? `${parentKey}[${key}]` : key;
+            if (object[key] !== null && typeof object[key] === 'object' && !(object[key] instanceof File)) {
+                // 遞迴處理巢狀物件
+                GetFormData(object[key], formData, fullKey);
+            } else {
+                // 添加值到 FormData
+                formData.append(fullKey, object[key]);
+            }
+        });
     }
     return formData;
 }
