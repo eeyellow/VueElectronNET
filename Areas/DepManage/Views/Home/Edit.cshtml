@@ -347,7 +347,7 @@
 
 <div id="app" v-cloak>
     <div class="mb-3">
-        <label class="form-label">名稱</label>
+        <label class="form-label"><strong>名稱</strong></label>
         <input type="text" class="form-control"
             v-model="ApplyData.Name" :disabled="!IsEditable" />
         <span class="field-validation-error">
@@ -355,7 +355,7 @@
         </span>
     </div>
     <div class="mb-3">
-        <label class="form-label">縮寫</label>
+        <label class="form-label"><strong>縮寫</strong></label>
         <input type="text" class="form-control"
                v-model="ApplyData.Alias" :disabled="!IsEditable" />
         <span class="field-validation-error">
@@ -363,7 +363,7 @@
         </span>
     </div>
     <div class="mb-3">
-        <label class="form-label">上層部門</label>
+        <label class="form-label"><strong>上層部門</strong></label>
         <lc-select v-model="ApplyData.ParentID"
                    :options="AllDepData"
                    :reduce="opt => opt.ID"
@@ -377,7 +377,7 @@
         </span>
     </div>
     <div class="mb-3">
-        <label class="form-label">成立日期</label>
+        <label class="form-label"><strong>成立日期</strong></label>
         <lc-datepicker 
             v-model="ApplyData.EstablishDate"
             :format="formatEstablishDate"
@@ -392,7 +392,7 @@
         </span>
     </div>
     <div class="mb-3">
-        <label class="form-label">人員 
+        <label class="form-label"><strong>人員</strong>
             <button v-if="IsEditable" class="btn btn-warning" v-on:click="addUser">
                 <i class="fa fa-plus"></i>
             </button> 
@@ -418,7 +418,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">
-            地支
+            <strong>地支</strong>
         </label>
         <div class="row mb-2" :style="IsEditable ? '' : { 'pointer-events': 'none' }">
             <div class="col-2" v-for="item in EarthlyBranchesEnum">
@@ -438,7 +438,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">
-            是否啟用
+            <strong>是否啟用</strong>
         </label>
         <div class="mb-2" :style="IsEditable ? '' : { 'pointer-events': 'none' }">
             <div class="form-check form-check-inline">
@@ -456,7 +456,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">
-            附件檔案
+            <strong>附件檔案</strong>
         </label>
         <div class="mb-2" :style="IsEditable ? '' : { 'pointer-events': 'none' }">
             <div>
