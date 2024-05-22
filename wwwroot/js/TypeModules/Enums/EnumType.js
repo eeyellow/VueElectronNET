@@ -2,6 +2,26 @@
 /* ===== 請勿手動變更修改 ===== */
 
 /**
+ * 檔案上傳類型
+            注意: 為避免使用者透過改ID即可下載其他檔案
+            此處的Enum需分類為
+            1.可供訪客下載 
+            2.需登入後才可下載
+            並於 UploadFileController/Download 進行簡易判斷
+ * @enum
+ */
+const UploadFileRefTypeEnum = Object.freeze({
+    Department: Object.freeze({
+        Name: `部門管理`,
+        Value: 1,
+    }),
+})
+
+export {
+    UploadFileRefTypeEnum
+}
+
+/**
  * Vue模式
  * @enum
  */

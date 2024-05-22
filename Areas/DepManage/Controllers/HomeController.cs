@@ -5,7 +5,7 @@ using ElectronApp.Database.Contexts;
 using ElectronApp.Database.Entities;
 using ElectronApp.Enums;
 using ElectronApp.Interfaces;
-
+using ElectronApp.Services;
 using ElectronApp.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +25,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
         private readonly IEditUserService<fvmEditUsers, UserInDepartments> _editUserService;
         private readonly IEditEarthlyBranchService<fvmEarthlyBranch, EarthlyBranchInDepartments> _editEarthlyBranchService;
         private readonly IQueryService<Departments> _queryService;
+        private readonly IFileUploadService _fileUploadService;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -36,6 +37,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
         /// <param name="editUserService">新增編輯User關聯相關服務</param>
         /// <param name="editEarthlyBranchService">新增編輯EarthlyBranch關聯相關服務</param>
         /// <param name="queryService">查詢資料相關服務</param>
+        /// <param name="fileUploadService">檔案上傳相關服務</param>
         public HomeController(IConfiguration configuration,
                               ILogger<HomeController> logger,
                               DatabaseContext context,
@@ -43,7 +45,8 @@ namespace ElectronApp.Areas.DepManage.Controllers
                               IEditService<fvmEdit, Departments> editService,
                               IEditUserService<fvmEditUsers, UserInDepartments> editUserService,
                               IEditEarthlyBranchService<fvmEarthlyBranch, EarthlyBranchInDepartments> editEarthlyBranchService,
-                              IQueryService<Departments> queryService)
+                              IQueryService<Departments> queryService,
+                              IFileUploadService fileUploadService)
             : base(configuration)
         {
             _logger = logger;
@@ -53,6 +56,7 @@ namespace ElectronApp.Areas.DepManage.Controllers
             _editUserService = editUserService;
             _editEarthlyBranchService = editEarthlyBranchService;
             _queryService = queryService;
+            _fileUploadService = fileUploadService;
         }
 
         /// <summary>
@@ -173,10 +177,11 @@ namespace ElectronApp.Areas.DepManage.Controllers
         /// 編輯頁 - 接收資料
         /// </summary>
         /// <param name="fvm"></param>
+        /// <param name="files"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostEditDataAsync(fvmEdit fvm)
+        public async Task<IActionResult> PostEditDataAsync(fvmEdit fvm, List<IFormFile> files)
         {
             var vallidResult = _editService.Valid(fvm, ModelState);
 
@@ -187,19 +192,23 @@ namespace ElectronApp.Areas.DepManage.Controllers
             }
 
             var result = await _editService.Save(fvm);
+            var returnID = ((Departments)result.Data).ID;
 
-            
             foreach (var item in fvm.Users ?? new List<fvmEditUsers>())
             {
-                item.DepartmentID = ((Departments)result.Data).ID;
+                item.DepartmentID = returnID;
                 await _editUserService.Save(item);
             }
 
             foreach (var item in fvm.EarthlyBranch ?? new List<fvmEarthlyBranch>())
             {
-                item.DepartmentID = ((Departments)result.Data).ID;
+                item.DepartmentID = returnID;
                 await _editEarthlyBranchService.Save(item);
             }
+
+            //儲存檔案
+            var saveFileResult = await _fileUploadService
+                .Save(files, returnID, UploadFileRefTypeEnum.Department, Guid.NewGuid().ToString());
 
             return HttpTool.CreateResponse(result);
         }

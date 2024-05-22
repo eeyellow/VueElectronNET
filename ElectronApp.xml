@@ -9,7 +9,7 @@
             部門管理
             </summary>
         </member>
-        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Areas.DepManage.Services.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditUserService{ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers,ElectronApp.Database.Entities.UserInDepartments},ElectronApp.Areas.DepManage.Services.IEditEarthlyBranchService{ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch,ElectronApp.Database.Entities.EarthlyBranchInDepartments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments})">
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{ElectronApp.Areas.DepManage.Controllers.HomeController},ElectronApp.Database.Contexts.DatabaseContext,ElectronApp.Areas.DepManage.Services.IListService{ElectronApp.Areas.DepManage.ViewModels.ListViewModel,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditService{ElectronApp.Areas.DepManage.ViewModels.fvmEdit,ElectronApp.Database.Entities.Departments},ElectronApp.Areas.DepManage.Services.IEditUserService{ElectronApp.Areas.DepManage.ViewModels.fvmEditUsers,ElectronApp.Database.Entities.UserInDepartments},ElectronApp.Areas.DepManage.Services.IEditEarthlyBranchService{ElectronApp.Areas.DepManage.ViewModels.fvmEarthlyBranch,ElectronApp.Database.Entities.EarthlyBranchInDepartments},ElectronApp.Areas.DepManage.Services.IQueryService{ElectronApp.Database.Entities.Departments},ElectronApp.Services.IFileUploadService)">
             <summary>
             Constructor
             </summary>
@@ -21,6 +21,7 @@
             <param name="editUserService">新增編輯User關聯相關服務</param>
             <param name="editEarthlyBranchService">新增編輯EarthlyBranch關聯相關服務</param>
             <param name="queryService">查詢資料相關服務</param>
+            <param name="fileUploadService">檔案上傳相關服務</param>
         </member>
         <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.Index">
             <summary>
@@ -58,7 +59,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.PostEditDataAsync(ElectronApp.Areas.DepManage.ViewModels.fvmEdit)">
+        <member name="M:ElectronApp.Areas.DepManage.Controllers.HomeController.PostEditDataAsync(ElectronApp.Areas.DepManage.ViewModels.fvmEdit,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
             編輯頁 - 接收資料
             </summary>
@@ -517,6 +518,20 @@
             ListViewModel
             </summary>
         </member>
+        <member name="T:ElectronApp.Controllers.FileController">
+            <summary>
+            檔案相關功能
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Controllers.FileController.#ctor(Microsoft.Extensions.Logging.ILogger{ElectronApp.Controllers.LinkChainController},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,ElectronApp.Services.IFileUploadService)">
+            <summary>
+            建構式
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="webHostEnvironment"></param>
+            <param name="fileUploadService"></param>
+        </member>
         <member name="T:ElectronApp.Controllers.HomeController">
             <summary>
             首頁控制器
@@ -604,6 +619,9 @@
         <member name="P:ElectronApp.Database.Contexts.DatabaseContext.EarthlyBranchInDepartments">
             <summary> 地支與部門的關聯表 </summary>
         </member>
+        <member name="P:ElectronApp.Database.Contexts.DatabaseContext.UploadFile">
+            <summary> 上傳檔案資料 </summary>
+        </member>
         <member name="M:ElectronApp.Database.Contexts.DatabaseContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ElectronApp.Database.Contexts.DatabaseContext})">
             <summary>
             建構式
@@ -659,6 +677,36 @@
         <member name="P:ElectronApp.Database.Entities.EarthlyBranchInDepartments.DepartmentID">
             <summary>
             部門名稱
+            </summary>
+        </member>
+        <member name="T:ElectronApp.Database.Entities.UploadFile">
+            <summary>
+            上傳檔案資料
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UploadFile.RefID">
+            <summary>
+            參照資料編號
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UploadFile.RefType">
+            <summary>
+            參照功能編號
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UploadFile.Name">
+            <summary>
+            檔案名稱
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UploadFile.FileName">
+            <summary>
+            實體檔案名稱
+            </summary>
+        </member>
+        <member name="P:ElectronApp.Database.Entities.UploadFile.ContentType">
+            <summary>
+            ContentType
             </summary>
         </member>
         <member name="T:ElectronApp.Database.Entities.UserInDepartments">
@@ -895,6 +943,19 @@
             <param name="dbSet"></param>
             <returns></returns>
         </member>
+        <member name="T:ElectronApp.Enums.UploadFileRefTypeEnum">
+            <summary>
+            檔案上傳類型
+            注意: 為避免使用者透過改ID即可下載其他檔案
+            此處的Enum需分類為
+            1.可供訪客下載 
+            2.需登入後才可下載
+            並於 UploadFileController/Download 進行簡易判斷
+            </summary>
+        </member>
+        <member name="F:ElectronApp.Enums.UploadFileRefTypeEnum.Department">
+            <summary>部門管理</summary>
+        </member>
         <member name="T:ElectronApp.Enums.VueModeEnum">
             <summary>
             Vue模式
@@ -1074,6 +1135,18 @@
         <member name="M:ElectronApp.Migrations.EarthlyBranchInDepartments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:ElectronApp.Migrations.UploadFile">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UploadFile.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UploadFile.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ElectronApp.Migrations.UploadFile.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:ElectronApp.Program">
             <summary>
             主程式類別
@@ -1110,6 +1183,45 @@
             <summary>
             雙擊事件的處理方法
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronApp.Services.FileUploadService">
+            <summary>
+            檔案上傳
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Services.FileUploadService.#ctor(ElectronApp.Database.Contexts.DatabaseContext)">
+            <summary>
+            建構式
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ElectronApp.Services.FileUploadService.Save(Microsoft.AspNetCore.Http.IFormFile,System.Int64,ElectronApp.Enums.UploadFileRefTypeEnum,System.String)">
+            <summary>
+            儲存
+            </summary>
+            <param name="file"></param>
+            <param name="refID"></param>
+            <param name="refType"></param>
+            <param name="sessionID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Services.FileUploadService.Save(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Int64,ElectronApp.Enums.UploadFileRefTypeEnum,System.String)">
+            <summary>
+            儲存(多檔案)
+            </summary>
+            <param name="files"></param>
+            <param name="refID"></param>
+            <param name="refType"></param>
+            <param name="sessionID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Services.FileUploadService.ShowFiles(System.Int64,ElectronApp.Enums.UploadFileRefTypeEnum)">
+            <summary>
+            
+            </summary>
+            <param name="refID"></param>
+            <param name="refType"></param>
             <returns></returns>
         </member>
         <member name="T:ElectronApp.Tools.AutofacModule">
@@ -1318,6 +1430,92 @@
         </member>
         <member name="P:ElectronApp.Tools.Publish.Channel">
             <summary> Channel </summary>
+        </member>
+        <member name="T:ElectronApp.Tools.EncryptTool">
+            <summary>
+            Enum 相關工具
+            </summary>
+        </member>
+        <member name="F:ElectronApp.Tools.EncryptTool._encryptKey">
+            <summary> 加密金鑰 </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.EncryptTool.SetEncryptKey(System.String)">
+            <summary> 設定加密金鑰 (預設會有KEY，但建議初始) </summary>
+            <param name="key">加密KEY</param>
+        </member>
+        <member name="M:ElectronApp.Tools.EncryptTool.AesEncrypt(System.String)">
+            <summary> Aes加密 </summary>
+            <param name="strInput">字串</param>
+            <returns>加密後的字串</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EncryptTool.AesDecrypt(System.String)">
+            <summary> Aes解密 </summary>
+            <param name="strInput">字串</param>
+            <returns>解密後的字串</returns>
+        </member>
+        <member name="T:ElectronApp.Tools.EnumMapTool">
+            <summary>
+            Enum 相關工具
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.GetDescription(System.Object)">
+            <summary>
+             取得自訂 Enum 描述
+            </summary>
+            <param name="enumValue">目標物件</param>
+            <returns>指定Enum物件描述值</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.GetDescriptionWithEnumName(System.Object)">
+            <summary>
+             取得 (Enum名稱) + 自訂 Enum 描述
+            </summary>
+            <param name="enumValue">目標物件</param>
+            <returns>指定Enum物件描述值</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.GetLocalizedDescription(System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            取得自訂 Enum 多語系描述
+            </summary>
+            <param name="enumValue">目標物件</param>
+            <param name="culture">目標語言</param>
+            <returns>指定Enum物件描述值</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.EnumToList``1">
+            <summary>
+            列舉轉為List
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns>列舉清單</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.EnumToListWithBinaryValue``1(System.Int32)">
+            <summary>
+            將二進位的數值轉為列舉清單
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="binaryValue">二進位的數值</param>
+            <returns>列舉清單</returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.ToEnum``1(System.Int32,``0)">
+            <summary>
+            將型別轉換為指定Enum
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="strEnumValue"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.isVlaid``1(System.Int32)">
+            <summary>
+            判斷是否為合法EnumValue
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="strEnumValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronApp.Tools.EnumMapTool.ParseToDictionary(System.Type)">
+            <summary> Enum 型別解析成 資料字典 </summary>
+            <param name="type">Enum型態</param>
+            <returns>Enum資料字典(value => item1: enum text; item2: enum description)</returns>
         </member>
         <member name="T:ElectronApp.Tools.HardwareInfoTool">
             <summary>
@@ -1587,6 +1785,18 @@
             <summary> Loads and parses the documentation file for the specified assembly </summary>
             <param name="assembly">The assembly to find the XML document for</param>
             <returns>The XML document</returns>
+        </member>
+        <member name="T:ElectronApp.Tools.WebHostEnvironmentManager">
+            <summary> 環境變數 Manager </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.WebHostEnvironmentManager.WebRootPath">
+            <summary> wwwroot 實體路徑 </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.WebHostEnvironmentManager.ContentRootPath">
+            <summary> 網站 實體路徑 </summary>
+        </member>
+        <member name="P:ElectronApp.Tools.WebHostEnvironmentManager.EnvironmentName">
+            <summary> 環境名稱 </summary>
         </member>
         <member name="T:ElectronApp.ViewModels.BaseSortViewModel">
             <summary> 基底排序模型 </summary>

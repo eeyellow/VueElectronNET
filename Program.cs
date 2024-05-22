@@ -122,6 +122,12 @@ namespace ElectronApp
                 TypeTransferExtension.Generate(Path.Combine(app.Environment.ContentRootPath, "wwwroot", "js"));
             }
 
+            WebHostEnvironmentManager.WebRootPath = app.Environment.WebRootPath;
+            WebHostEnvironmentManager.ContentRootPath = app.Environment.ContentRootPath;
+            WebHostEnvironmentManager.EnvironmentName = app.Environment.EnvironmentName;
+
+            EncryptTool.SetEncryptKey("LC@ElectronApp");
+
             app.Run();
         }
     }

@@ -50,3 +50,5 @@ Medicine.db-wal
 Hangfire.db
 Hangfire.db-shm
 Hangfire.db-wal
+
+UploadFiles/
