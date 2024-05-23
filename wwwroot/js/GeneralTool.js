@@ -187,7 +187,9 @@ export function GetFormData(object, formData = new FormData(), parentKey = '') {
                 GetFormData(object[key], formData, fullKey);
             } else {
                 // 添加值到 FormData
-                formData.append(fullKey, object[key]);
+                if (object[key] !== null) {
+                    formData.append(fullKey, object[key]);
+                }
             }
         });
     }
