@@ -189,11 +189,10 @@
                             },
                             body: formData
                         }).then(async (response) => {
-                            const responseData = await response.json();
                             if (response.status >= 400 && response.status < 600) {
-                                throw responseData;
+                                throw response;
                             }
-                            return responseData;
+                            return response;
                         }).then((returnedResponse) => {
                             ModelMappingForce(vueInstance.ApplyData, returnedResponse)
                             Swal.fire({
@@ -204,24 +203,23 @@
                             }).then(() => {
                                 location.reload();
                             })
-                        }).catch(function (err) {
-                            const model = err.Data;
-                            ModelMappingForce(vueInstance.ApplyData, model);
-                            const modelstate = err.ModelState;
+                        }).catch(async function (err) {
+                            const errData = await err.json();
+                            
 
-                            switch (err.status) {
+                            switch (errData.StatusCode) {
                                 case 400:
-                                    const model = err.responseJSON.Data;
-                                    ModelMappingForce(this.ApplyData, model);
-                                    const modelstate = err.responseJSON.ModelState;
+                                    const model = errData.Data;
+                                    ModelMappingForce(vueInstance.ApplyData, model);
+                                    const modelstate = errData.ModelState;
 
                                     modelstate.forEach(function (ele) {
-                                        StringToStruct(ele.Key, ele.Value, this.ApplyData);
-                                    }, this);
-                                    if (this.ApplyData.ModelError__AlertMessage) {
+                                        StringToStruct(ele.Key, ele.Value, vueInstance.ApplyData);
+                                    }, vueInstance);
+                                    if (vueInstance.ApplyData.ModelError__AlertMessage) {
                                         Swal.fire({
                                             title: 'Error!',
-                                            text: this.ApplyData.ModelError__AlertMessage,
+                                            text: vueInstance.ApplyData.ModelError__AlertMessage,
                                             icon: 'error',
                                             confirmButtonText: 'Cool'
                                         })

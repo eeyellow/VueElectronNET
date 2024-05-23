@@ -206,9 +206,11 @@ namespace ElectronApp.Areas.DepManage.Controllers
                 await _editEarthlyBranchService.Save(item);
             }
 
-            //儲存檔案
-            var saveFileResult = await _fileUploadService
-                .Save(files, returnID, UploadFileRefTypeEnum.Department, Guid.NewGuid().ToString());
+            if (files.Any()) {
+                //儲存檔案
+                var saveFileResult = await _fileUploadService
+                    .Save(files, returnID, UploadFileRefTypeEnum.Department, Guid.NewGuid().ToString());
+            }
 
             return HttpTool.CreateResponse(result);
         }
