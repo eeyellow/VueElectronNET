@@ -131,34 +131,35 @@
                 /** 取得初始化資料 */
                 async getInitModel () {
                     try {
-                        const response = await $.ajax({
-                            url: PageScope.Url.DataSource + "/" + PageScope.ID,
-                            type: "POST",
+                        let response = await fetch(PageScope.Url.DataSource + "/" + PageScope.ID, {
+                            method: "POST",
                             headers: {
-                                RequestVerificationToken: document.querySelector(
-                                    "[name='__RequestVerificationToken']"
-                                ).value,
-                            },
+                                "Content-Type": "application/json",
+                                "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
+                            }
                         });
-                        ModelMappingForce(this.ApplyData, response);
-                    } catch (err) {
-                        console.error(err);
+                        if (response.ok) {
+                            let data = await response.json();
+                            ModelMappingForce(this.ApplyData, data);
+                        }
+                    } catch (error) {
+                        console.log(`Error: ${error}`);
                     }
 
                     try {
-                        const response = await $.ajax({
-                            url: PageScope.Url.FileSource,
-                            type: "POST",
+                        let response = await fetch(PageScope.Url.FileSource, {
+                            method: "POST",
                             headers: {
-                                RequestVerificationToken: document.querySelector(
-                                    "[name='__RequestVerificationToken']"
-                                ).value,
-                            },
+                                "Content-Type": "application/json",
+                                "RequestVerificationToken": document.querySelector("[name='__RequestVerificationToken']").value
+                            }
                         });
-                        this.FileData = response;
-                    }
-                    catch (err) {
-                        console.error(err);
+                        if (response.ok) {
+                            let data = await response.json();
+                            this.FileData = data;
+                        }
+                    } catch (error) {
+                        console.log(`Error: ${error}`);
                     }
                 },
                 /** 日期格式 => yyyy/MM/dd */
@@ -194,23 +195,24 @@
                             }
                             return responseData;
                         }).then((returnedResponse) => {
-                            ModelMappingForce(returnedResponse, vueInstance.ApplyData)
+                            ModelMappingForce(vueInstance.ApplyData, returnedResponse)
                             Swal.fire({
                                 title: '儲存成功!',
                                 text: 'Success',
                                 icon: 'success',
                                 confirmButtonText: 'Cool'
+                            }).then(() => {
+                                location.reload();
                             })
-                            //history.go(-1);
                         }).catch(function (err) {
                             const model = err.Data;
-                            ModelMappingForce(model, vueInstance.ApplyData);
+                            ModelMappingForce(vueInstance.ApplyData, model);
                             const modelstate = err.ModelState;
 
                             switch (err.status) {
                                 case 400:
                                     const model = err.responseJSON.Data;
-                                    ModelMappingForce(model, this.ApplyData);
+                                    ModelMappingForce(this.ApplyData, model);
                                     const modelstate = err.responseJSON.ModelState;
 
                                     modelstate.forEach(function (ele) {
@@ -458,14 +460,14 @@
         <label class="form-label">
             <strong>附件檔案</strong>
         </label>
-        <div class="mb-2" :style="IsEditable ? '' : { 'pointer-events': 'none' }">
-            <div>
+        <div class="mb-2">
+            <div v-if="IsEditable">
                 <input type="file" multiple name="files" />
                 <span class="field-validation-error">{{ ApplyData.ModelError__files }}</span>
             </div>
             <div v-for="file in FileData">
                 <div>
-                    <a class="pg-DeleteFile" href="#" title="刪除" v-on:click="deleteFile(file)"
+                    <a v-if="IsEditable" class="pg-DeleteFile" href="#" title="刪除" v-on:click="deleteFile(file)"
                        style="margin-right: 10px;">
                         <i class="fa fa-times fa-lg" aria-hidden="true"></i>
                     </a>

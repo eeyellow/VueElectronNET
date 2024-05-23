@@ -61,7 +61,7 @@
                         @if (env.EnvironmentName != "Production")
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Hangfire">排程工作</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hangfire" asp-action="">排程工作</a>
                             </li>
                         }
                         @if (env.EnvironmentName == "Production")

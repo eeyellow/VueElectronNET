@@ -183,12 +183,12 @@ namespace ElectronApp.Areas.DepManage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostEditDataAsync(fvmEdit fvm, List<IFormFile> files)
         {
-            var vallidResult = _editService.Valid(fvm, ModelState);
-
-            if (vallidResult.ModelState != null && vallidResult.ModelState.Any())
+            var validResult = _editService.Valid(fvm, ModelState);
+            
+            if (validResult.ModelState != null && validResult.ModelState.Any())
             {
                 // 驗證不通過
-                return HttpTool.CreateResponse(vallidResult);
+                return HttpTool.CreateResponse(validResult);
             }
 
             var result = await _editService.Save(fvm);
