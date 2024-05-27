@@ -205,17 +205,16 @@
                             })
                         }).catch(async function (err) {
                             const errData = await err.json();
-                            
+                            const model = errData.Data;
+                            ModelMappingForce(vueInstance.ApplyData, model);
+                            const modelstate = errData.ModelState;
 
                             switch (errData.StatusCode) {
                                 case 400:
-                                    const model = errData.Data;
-                                    ModelMappingForce(vueInstance.ApplyData, model);
-                                    const modelstate = errData.ModelState;
-
                                     modelstate.forEach(function (ele) {
                                         StringToStruct(ele.Key, ele.Value, vueInstance.ApplyData);
                                     }, vueInstance);
+                                    
                                     if (vueInstance.ApplyData.ModelError__AlertMessage) {
                                         Swal.fire({
                                             title: 'Error!',
