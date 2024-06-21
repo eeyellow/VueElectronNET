@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build --emptyOutDir",
-    "preview": "vite preview"
+    "dev": "npm run sync && vite --host",
+    "build": "npm run sync && vite build --emptyOutDir",
+    "preview": "npm run sync && vite preview",
+    "sync": "node sync.js"
   },
   "dependencies": {
     "vue": "^3.4.21"

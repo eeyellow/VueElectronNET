@@ -74,6 +74,18 @@ namespace ElectronApp
             builder.Services
                 .AddHangfireServer();
 
+            builder.Services.AddCors(options =>
+            {
+                // CORS全開，建議只用在Electron模式
+                options.AddPolicy("FrontendPolicy", policy =>
+                {
+                    policy.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .SetIsOriginAllowed(origin => true)
+                          .AllowCredentials();
+                });
+            });
+
             //=====================================================================
             var app = builder.Build();
 
@@ -81,14 +93,18 @@ namespace ElectronApp
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                // Electron模式下不啟用HSTS
+                // app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // Electron模式下不啟用Https
+            // app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
@@ -195,10 +211,10 @@ namespace ElectronApp
                 Electron.Tray.OnDoubleClick += async (args, rectangle) => await DoubleClickAsync();
             }
 
-            if (env.EnvironmentName == "Production")
-            {
-                browserWindow.RemoveMenu();
-            }
+            //if (env.EnvironmentName == "Production")
+            //{
+            //    browserWindow.RemoveMenu();
+            //}
 
             await browserWindow.WebContents.Session.ClearCacheAsync();
 
