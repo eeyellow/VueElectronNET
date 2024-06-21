@@ -519,6 +519,25 @@
             ListViewModel
             </summary>
         </member>
+        <member name="T:ElectronApp.Controllers.AppController">
+            <summary>
+            單頁式應用控制器
+            </summary>
+        </member>
+        <member name="M:ElectronApp.Controllers.AppController.#ctor(Microsoft.Extensions.Logging.ILogger{ElectronApp.Controllers.AppController},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            建構式
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:ElectronApp.Controllers.AppController.Index">
+            <summary>
+            Index
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ElectronApp.Controllers.FileController">
             <summary>
             檔案相關功能
