@@ -6,7 +6,7 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? 'VueApp' : '',
   plugins: [vue()],
   build: {
-    outDir: '../wwwroot/VueApp',
+    outDir: '../Backend/wwwroot/VueApp',
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
